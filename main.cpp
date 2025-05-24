@@ -1,9 +1,12 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "gamesettingsmanager.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    GameSettingsManager gameSettingsManager;
 
     QQmlApplicationEngine engine;
     QObject::connect(
