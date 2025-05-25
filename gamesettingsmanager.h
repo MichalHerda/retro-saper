@@ -3,15 +3,15 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QMetaEnum>
 
 class GameSettingsManager : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
 
-
 public:
-    enum DifficultyLevel {
+    enum class DifficultyLevel {
         RadiationScavenge,
         WastelandWanderer,
         AshenSurvivor,
@@ -20,6 +20,7 @@ public:
         GammaReaper,
         DoomsdayOverlord,
     };
+    Q_ENUM(DifficultyLevel)
 
     explicit GameSettingsManager(QObject *parent = nullptr);
 

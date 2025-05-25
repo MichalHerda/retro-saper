@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QtQmlIntegration/qqmlintegration.h>
 #include "gamesettingsmanager.h"
 
 int main(int argc, char *argv[])
@@ -7,6 +8,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     GameSettingsManager gameSettingsManager;
+    qRegisterMetaType<GameSettingsManager::DifficultyLevel>("GameSettingsManager::DifficultyLevel");
 
     QQmlApplicationEngine engine;
     QObject::connect(
