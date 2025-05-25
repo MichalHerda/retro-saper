@@ -25,5 +25,19 @@ Window {
         ]
         textRole: "text"
         valueRole: "value"
+
+        onCurrentIndexChanged: {
+            gameSettingsManager.difficultyLevel = model[currentIndex].value
+        }
+    }
+
+    Timer {
+        id: debug
+        interval: 5000
+        running: true
+        repeat: true
+        onTriggered: {
+            console.log("difficulty level: ", gameSettingsManager.difficultyLevel)
+        }
     }
 }
