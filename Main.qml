@@ -32,12 +32,26 @@ Window {
             id: mainOptionsFrame
             width: titlePageRow.width * 0.25
             height: titlePageRow.height
+            color: "#661111"
 
             Column {
                 id: mainOptionsColumn
-                y: mainOptionsColumn.height * 0.1
+                width: mainOptionsFrame.width
+                height: mainOptionsFrame.height
+
+                Label {
+                    id: difficultyLabel
+                    width: mainOptionsColumn.width * 0.9
+                    height: mainOptionsColumn.height * 0.2
+                    anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
+                    text: "game difficulty: "
+                    font.pixelSize: Math.min(difficultyLabel.height, difficultyLabel.width) * 0.25
+                }
+
                 ComboBox {
-                    //anchors.centerIn: parent
+                    width: mainOptionsColumn.width * 0.9
+                    height: mainOptionsColumn.height * 0.2
+                    anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
                     property bool initialize: true
                     model: [
                         {text: "RadiationScavenge", value: GameSettingsManager.DifficultyLevel.RadiationScavenge},
