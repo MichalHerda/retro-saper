@@ -21,6 +21,7 @@ qt_add_qml_module(appSAPER
     SOURCES
         gamesettingsmanager.h
         gamesettingsmanager.cpp
+        RESOURCES resources/resources.qrc
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

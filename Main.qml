@@ -21,6 +21,11 @@ Window {
             width: titlePageRow.width * 0.75
             height: titlePageRow.height
 
+            Image {
+                anchors.fill: parent
+                source: "qrc:/SAPER.png"
+            }
+
         }
 
         Rectangle {
