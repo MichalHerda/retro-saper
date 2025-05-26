@@ -27,7 +27,7 @@ public:
     Q_INVOKABLE void setDifficultyLevel(GameSettingsManager::DifficultyLevel _difficultyLevel);
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ difficultyLevelRead WRITE difficultyLevelWrite NOTIFY difficultyLevelChanged);
 
-    GameSettingsManager::DifficultyLevel difficultyLevel;
+    GameSettingsManager::DifficultyLevel difficultyLevel = DifficultyLevel::WastelandWanderer;
     GameSettingsManager::DifficultyLevel difficultyLevelRead()const;
     void difficultyLevelWrite(GameSettingsManager::DifficultyLevel _difficultyLevel);
 
