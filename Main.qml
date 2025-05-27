@@ -37,18 +37,26 @@ Window {
             Column {
                 id: mainOptionsColumn
                 width: mainOptionsFrame.width
-                height: mainOptionsFrame.height
+                height: mainOptionsFrame.height * 0.5
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: mainOptionsColumn.height * 0.025
 
                 Label {
-                    id: difficultyLabel
+                    id: difficultyLevelLabel
                     width: mainOptionsColumn.width * 0.9
-                    height: mainOptionsColumn.height * 0.2
+                    height: mainOptionsColumn.height * 0.15
                     anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
+
                     text: "game difficulty: "
-                    font.pixelSize: Math.min(difficultyLabel.height, difficultyLabel.width) * 0.25
+                    color: "#FFD700"
+                    font.pixelSize: Math.min(difficultyLevelLabel.height, difficultyLevelLabel.width) * 0.4
+
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                 }
 
                 ComboBox {
+                    id: difficultyLeveComboBox
                     width: mainOptionsColumn.width * 0.9
                     height: mainOptionsColumn.height * 0.2
                     anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
@@ -78,6 +86,26 @@ Window {
                         }
                         initialize = false;
                     }
+                }
+
+                Item {
+                    id: separator
+                    width: mainOptionsColumn.width
+                    height: mainOptionsColumn.height * 0.25
+                }
+
+                Button {
+                    id: startGameButton
+                    width: mainOptionsColumn.width * 0.9
+                    height: mainOptionsColumn.height * 0.25
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    background: Rectangle {
+                        anchors.fill: parent
+                        color: startGameButton.pressed ? "#1C1C1C" : "#2E2E2E"
+                    }
+                    text: "START"
+
+
                 }
             }
         }
