@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>SAPER.png</file>
+        <file>Minefield.qml</file>
     </qresource>
 </RCC>

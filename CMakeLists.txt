@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -18,10 +19,12 @@ qt_add_qml_module(appSAPER
     VERSION 1.0
     QML_FILES
         Main.qml
+        QML_FILES resources/Minefield.qml
     SOURCES
         gamesettingsmanager.h
         gamesettingsmanager.cpp
         RESOURCES resources/resources.qrc
+        SOURCES src/sapermodel.h src/sapermodel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -38,6 +41,7 @@ set_target_properties(appSAPER PROPERTIES
 target_link_libraries(appSAPER
     PRIVATE Qt6::Quick
 )
+target_link_libraries(appSAPER PRIVATE Qt6::Core)
 
 include(GNUInstallDirs)
 install(TARGETS appSAPER

@@ -9,9 +9,12 @@ Window {
     visible: true
     title: qsTr("S.A.P.E.R.")
 
+    property bool gameStart: false
+
     GameSettingsManager {
         id: gameSettingsManager
     }
+
     Row {
         id: titlePageRow
         anchors.fill: parent
@@ -26,6 +29,13 @@ Window {
                 source: "qrc:/SAPER.png"
             }
 
+            Minefield {
+                id: minefield
+                anchors.fill: parent
+                width: titlePageRow.width * 0.75
+                height: titlePageRow.height
+                visible: gameStart
+            }
         }
 
         Rectangle {
@@ -105,6 +115,10 @@ Window {
                     }
                     text: "START"
 
+                    onClicked: {
+                        console.log("start game button clicked")
+                        gameStart = true;
+                    }
 
                 }
             }
@@ -118,7 +132,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            console.log("difficulty level: ", gameSettingsManager.difficultyLevel)
+            //console.log("difficulty level: ", gameSettingsManager.difficultyLevel)
         }
     }
 }
