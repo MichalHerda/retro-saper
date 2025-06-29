@@ -132,7 +132,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            //console.log("difficulty level: ", gameSettingsManager.difficultyLevel)
+            console.log("difficulty level: ", gameSettingsManager.difficultyLevel)
         }
     }
 }
