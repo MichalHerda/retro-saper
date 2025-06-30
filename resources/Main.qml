@@ -85,12 +85,12 @@ Window {
 
                     onCurrentIndexChanged: {
                         if(!initialize) {
-                            gameSettingsManager.difficultyLevel = model[currentIndex].value
+                            SaperController.difficultyLevel = model[currentIndex].value
                         }
                     }
                     Component.onCompleted: {
                         for (var i = 0; i < model.length; i++) {
-                              if (model[i].value === gameSettingsManager.difficultyLevel)
+                              if (model[i].value === SaperController.difficultyLevel)
                                   currentIndex = i;
                                   console.log("current index ", currentIndex)
                         }
@@ -132,7 +132,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            console.log("difficulty level: ", gameSettingsManager.difficultyLevel)
+            console.log("difficulty level: ", SaperController.difficultyLevel)
         }
     }
 }

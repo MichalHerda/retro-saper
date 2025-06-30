@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QMetaEnum>
+#include "sapermodel.h"
 
 class GameSettingsManager : public QObject
 {
@@ -35,6 +36,7 @@ signals:
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel _difficultyLevel);
 private:
     //GameSettingsManager::DifficultyLevel m_difficultyLevel;
+    SaperModel* m_saperModel = nullptr;
 };
 
 #endif // GAMESETTINGSMANAGER_H

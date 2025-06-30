@@ -7,6 +7,7 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -25,6 +26,8 @@ qt_add_qml_module(appSAPER
         src/sapermodel.cpp
         src/gamesettingsmanager.h
         src/gamesettingsmanager.cpp
+        src/sapercontroller.h
+        src/sapercontroller.cpp
     RESOURCES
         resources/resources.qrc
 )
@@ -43,6 +46,7 @@ set_target_properties(appSAPER PROPERTIES
 target_link_libraries(appSAPER
     PRIVATE Qt6::Quick
 )
+target_link_libraries(appSAPER PRIVATE Qt6::Core)
 target_link_libraries(appSAPER PRIVATE Qt6::Core)
 target_include_directories(appSAPER PRIVATE src)
 
