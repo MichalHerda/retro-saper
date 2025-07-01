@@ -21,6 +21,7 @@ qt_add_qml_module(appSAPER
     QML_FILES
         resources/Main.qml
         resources/Minefield.qml
+        resources/Options.qml
     SOURCES
         src/sapermodel.h
         src/sapermodel.cpp
