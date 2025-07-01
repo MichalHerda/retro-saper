@@ -31,7 +31,7 @@ Window {
 
             Minefield {
                 id: minefield
-                anchors.fill: parent
+                //anchors.fill: parent
                 width: titlePageRow.width * 0.75
                 height: titlePageRow.height
                 visible: gameStart

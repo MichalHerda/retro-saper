@@ -18,9 +18,13 @@ public:
 
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
+    Q_INVOKABLE int getRowsNo();
+    Q_INVOKABLE int getColsNo();
+
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel _difficultyLevel);
     GameSettingsManager::DifficultyLevel difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
+
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:

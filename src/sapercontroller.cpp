@@ -13,6 +13,17 @@ SaperController::~SaperController()
     delete m_model;
 }
 
+int SaperController::getRowsNo()
+{
+    return m_model->rowCount();
+}
+
+
+int SaperController::getColsNo()
+{
+    return m_model->columnCount();
+}
+
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
 {
     return difficultyLevel;
