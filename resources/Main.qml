@@ -51,7 +51,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            console.log("difficulty level: ", SaperController.difficultyLevel)
+            //console.log("difficulty level: ", SaperController.difficultyLevel)
         }
     }
 }

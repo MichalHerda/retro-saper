@@ -30,6 +30,9 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
+
+    void setGrid(int rows, int cols);
+
 signals:
 
 private:

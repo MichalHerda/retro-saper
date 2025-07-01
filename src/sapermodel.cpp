@@ -3,7 +3,7 @@
 SaperModel::SaperModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
-    m_grid.resize(m_rows, QList<CellData>(m_cols));
+    //m_grid.resize(m_rows, QList<CellData>(m_cols));
 }
 
 int SaperModel::rowCount(const QModelIndex &) const {
@@ -39,4 +39,11 @@ QHash<int, QByteArray> SaperModel::roleNames() const {
     roles[IsMineRole] = "isMine";
     roles[NeighborMinesRole] = "neighborMines";
     return roles;
+}
+
+void SaperModel::setGrid(int rows, int cols)
+{
+    m_rows = rows;
+    m_cols = cols;
+    qDebug() << "setGrid, rows: " << m_rows << ", cols: " << m_cols;
 }

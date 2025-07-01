@@ -14,14 +14,15 @@ class SaperController : public QObject
 
 public:
     explicit SaperController(QObject *parent = nullptr);
+    ~SaperController();
 
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel _difficultyLevel);
-
     GameSettingsManager::DifficultyLevel difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
-
+public slots:
+    void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel _difficultyLevel);
 
