@@ -40,30 +40,30 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
     int rows, cols;
     switch (level) {
     case GameSettingsManager::DifficultyLevel::RadiationScavenge:
-        rows = 8; cols = 8;
+        rows = 6; cols = 6;
         break;
     case GameSettingsManager::DifficultyLevel::WastelandWanderer:
-        rows = 16; cols = 16;
+        rows = 12; cols = 12;
         break;
 
     case GameSettingsManager::DifficultyLevel::AshenSurvivor:
-        rows = 24; cols = 24;
+        rows = 18; cols = 18;
         break;
 
     case GameSettingsManager::DifficultyLevel::NuclearOutlaw:
-        rows = 48; cols = 48;
+        rows = 24; cols = 24;
         break;
 
     case GameSettingsManager::DifficultyLevel::RadstormVeteran:
-        rows = 64; cols = 64;
+        rows = 36; cols = 36;
         break;
 
     case GameSettingsManager::DifficultyLevel::GammaReaper:
-        rows = 96; cols = 96;
+        rows = 48; cols = 48;
         break;
 
     case GameSettingsManager::DifficultyLevel::DoomsdayOverlord:
-        rows = 128; cols = 128;
+        rows = 60; cols = 60;
         break;
     }
 

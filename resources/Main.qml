@@ -3,6 +3,7 @@ import QtQuick.Controls
 import SAPER 1.0
 
 Window {
+    id: mainWindow
     width: 800
     height: 500
     color: "#1a0f0b"
@@ -10,6 +11,8 @@ Window {
     title: qsTr("S.A.P.E.R.")
 
     property bool gameStart: false
+
+    signal createMinefield()
 
     GameSettingsManager {
         id: gameSettingsManager
@@ -29,12 +32,15 @@ Window {
                 source: "qrc:/SAPER.png"
             }
 
-            Minefield {
-                id: minefield
-                //anchors.fill: parent
-                width: titlePageRow.width * 0.75
-                height: titlePageRow.height
-                visible: gameStart
+            Component {
+                id: minefieldComponent
+
+                Minefield {
+                    id: minefield
+                    width: titlePageRow.width * 0.75
+                    height: titlePageRow.height
+                    //visible: gameStart
+                }
             }
         }
 
@@ -43,6 +49,11 @@ Window {
             width: titlePageRow.width * 0.25
             height: titlePageRow.height
         }
+    }
+
+    onCreateMinefield: {
+        console.log("create minefieldComponent")
+        minefieldComponent.createObject(titleImageFrame)
     }
 
     Timer {

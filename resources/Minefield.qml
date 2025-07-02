@@ -23,14 +23,14 @@ Rectangle {
                      color: "black"
                      border {
                         color: "blue"
-                        width: minefieldRec.width * 0.05
+                        width: minefieldColumn.width * 0.001
                      }
                      width: minefieldColumn.width / SaperController.getColsNo()
                      height: minefieldColumn.height / SaperController.getRowsNo()
                      // binduj tu stan komórki z modelu przez kontroler
                    }
                }
-           }
+            }
       }
    }
 }

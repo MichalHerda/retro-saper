@@ -82,8 +82,8 @@ Rectangle {
             onClicked: {
                 console.log("start game button clicked")
                 gameStart = true;
+                createMinefield()
             }
-
         }
     }
 }
