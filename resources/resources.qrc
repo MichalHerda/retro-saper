@@ -5,5 +5,7 @@
         <file>Options.qml</file>
         <file>Cell.qml</file>
         <file>CellImage.png</file>
+        <file>FlagImage.png</file>
+        <file>NuclearField.png</file>
     </qresource>
 </RCC>

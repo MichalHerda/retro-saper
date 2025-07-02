@@ -6,6 +6,12 @@ Rectangle {
    anchors.fill: parent
    color: "black"
 
+   Image {
+      id: backgroundImage
+      anchors.fill: parent
+      source: "qrc:/NuclearField.png"
+   }
+
    Column {
       id: minefieldColumn
       anchors.fill: parent
@@ -17,19 +23,7 @@ Rectangle {
                id: minefieldRow
                Repeater {
                   model: SaperController.getColsNo()
-                  /*
-                  Rectangle {
-                     id: minefieldRec
-                     color: "black"
-                     border {
-                        color: "blue"
-                        width: minefieldColumn.width * 0.001
-                     }
-                     width: minefieldColumn.width / SaperController.getColsNo()
-                     height: minefieldColumn.height / SaperController.getRowsNo()
-                     // binduj tu stan komórki z modelu przez kontroler
-                  }
-                  */
+
                   Cell {
                      id: mineFieldCell
                      width: minefieldColumn.width / SaperController.getColsNo()
