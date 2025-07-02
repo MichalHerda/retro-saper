@@ -3,5 +3,7 @@
         <file>SAPER.png</file>
         <file>Minefield.qml</file>
         <file>Options.qml</file>
+        <file>Cell.qml</file>
+        <file>CellImage.png</file>
     </qresource>
 </RCC>

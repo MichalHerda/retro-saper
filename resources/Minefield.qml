@@ -17,7 +17,7 @@ Rectangle {
                id: minefieldRow
                Repeater {
                   model: SaperController.getColsNo()
-
+                  /*
                   Rectangle {
                      id: minefieldRec
                      color: "black"
@@ -28,7 +28,13 @@ Rectangle {
                      width: minefieldColumn.width / SaperController.getColsNo()
                      height: minefieldColumn.height / SaperController.getRowsNo()
                      // binduj tu stan komórki z modelu przez kontroler
-                   }
+                  }
+                  */
+                  Cell {
+                     id: mineFieldCell
+                     width: minefieldColumn.width / SaperController.getColsNo()
+                     height: minefieldColumn.height / SaperController.getRowsNo()
+                  }
                }
             }
       }
