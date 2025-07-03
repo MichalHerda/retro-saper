@@ -24,6 +24,16 @@ int SaperController::getColsNo()
     return m_model->columnCount();
 }
 
+int SaperController::getBombsNo()
+{
+    return m_model->getBombsNo();
+}
+
+void SaperController::placeBombsRandomly()
+{
+    m_model->placeBombsRandomly(getBombsNo());
+}
+
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
 {
     return difficultyLevel;

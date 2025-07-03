@@ -46,10 +46,54 @@ void SaperModel::setGrid(int rows, int cols)
     m_rows = rows;
     m_cols = cols;
     qDebug() << "setGrid, rows: " << m_rows << ", cols: " << m_cols;
+
+    m_grid.clear();
+    m_grid.resize(m_rows);
+    for (int r = 0; r < m_rows; ++r) {
+        m_grid[r].resize(m_cols);
+    }
 }
 
 void SaperModel::setBombsNo(int bombs)
 {
     m_bombs = bombs;
     qDebug() << "setBombsNo, bombs: " << m_bombs;
+}
+
+int SaperModel::getBombsNo()
+{
+    return m_bombs;
+}
+
+void SaperModel::placeBombsRandomly(int bombsNo)
+{
+    setGrid(m_rows, m_cols);
+    // Tworzymy płaską listę wszystkich możliwych pozycji
+    std::vector<std::pair<int, int>> positions;
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            positions.emplace_back(r, c);
+        }
+    }
+
+    // Tasujemy pozycje
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(positions.begin(), positions.end(), gen);
+
+    // Wybieramy bombCount pierwszych pól
+    for (int i = 0; i < bombsNo && i < static_cast<int>(positions.size()); ++i) {
+        int r = positions[i].first;
+        int c = positions[i].second;
+        m_grid[r][c].isMine = true;
+    }
+
+    // Obliczamy liczbę sąsiednich bomb dla każdej komórki
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            if (!m_grid[r][c].isMine) {
+                //m_grid[r][c].neighborMines = countNeighborBombs(r, c);
+            }
+        }
+    }
 }

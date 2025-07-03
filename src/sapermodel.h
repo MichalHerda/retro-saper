@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QStandardItemModel>
 #include <QMetaEnum>
+#include <random>
+#include <algorithm>
 
 struct CellData {
     bool isRevealed = false;
@@ -33,6 +35,8 @@ public:
 
     void setGrid(int rows, int cols);
     void setBombsNo(int bombs);
+    int getBombsNo();
+    void placeBombsRandomly(int bombsNo);
 
 signals:
 

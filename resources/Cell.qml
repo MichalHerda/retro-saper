@@ -40,8 +40,16 @@ Item {
         visible: false
         width: cell.width * 0.75
         height: cell.height * 0.75
-        //source: "qrc:/FlagImage.png"
         source: "qrc:/RadiationWarning.png"
+    }
+
+    Image {
+        id: bombImage
+        anchors.centerIn: cell
+        visible: cell.isMine
+        width: cell.width * 0.75
+        height: cell.height * 0.75
+        source: "qrc:/BombImage.png"
     }
 
     MouseArea {

@@ -53,6 +53,7 @@ Window {
 
     onCreateMinefield: {
         console.log("create minefieldComponent")
+        SaperController.placeBombsRandomly()
         minefieldComponent.createObject(titleImageFrame)
     }
 
