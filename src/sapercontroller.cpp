@@ -85,6 +85,7 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
 
     m_model->SaperModel::setGrid(rows, cols);
     m_model->SaperModel::setBombsNo(bombs);
+    placeBombsRandomly();
     emit modelChanged();
 }
 

@@ -9,8 +9,6 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     SaperController saperController;
-    //GameSettingsManager gameSettingsManager;
-    //qRegisterMetaType<GameSettingsManager::DifficultyLevel>("GameSettingsManager::DifficultyLevel");
 
     QQmlApplicationEngine engine;
     QObject::connect(

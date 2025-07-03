@@ -3,7 +3,7 @@
 SaperModel::SaperModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
-    //m_grid.resize(m_rows, QList<CellData>(m_cols));
+
 }
 
 int SaperModel::rowCount(const QModelIndex &) const {
@@ -43,6 +43,8 @@ QHash<int, QByteArray> SaperModel::roleNames() const {
 
 void SaperModel::setGrid(int rows, int cols)
 {
+    //beginResetModel();
+
     m_rows = rows;
     m_cols = cols;
     qDebug() << "setGrid, rows: " << m_rows << ", cols: " << m_cols;
@@ -52,6 +54,8 @@ void SaperModel::setGrid(int rows, int cols)
     for (int r = 0; r < m_rows; ++r) {
         m_grid[r].resize(m_cols);
     }
+
+    //endResetModel();
 }
 
 void SaperModel::setBombsNo(int bombs)
@@ -67,6 +71,8 @@ int SaperModel::getBombsNo()
 
 void SaperModel::placeBombsRandomly(int bombsNo)
 {
+    //beginResetModel();
+
     setGrid(m_rows, m_cols);
     // Tworzymy płaską listę wszystkich możliwych pozycji
     std::vector<std::pair<int, int>> positions;
@@ -96,4 +102,6 @@ void SaperModel::placeBombsRandomly(int bombsNo)
             }
         }
     }
+
+    //endResetModel();
 }

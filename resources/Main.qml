@@ -39,7 +39,6 @@ Window {
                     id: minefield
                     width: titlePageRow.width * 0.75
                     height: titlePageRow.height
-                    //visible: gameStart
                 }
             }
         }
@@ -53,7 +52,6 @@ Window {
 
     onCreateMinefield: {
         console.log("create minefieldComponent")
-        SaperController.placeBombsRandomly()
         minefieldComponent.createObject(titleImageFrame)
     }
 
@@ -63,7 +61,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            //console.log("difficulty level: ", SaperController.difficultyLevel)
+
         }
     }
 }

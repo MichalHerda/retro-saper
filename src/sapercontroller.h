@@ -16,7 +16,7 @@ public:
     explicit SaperController(QObject *parent = nullptr);
     ~SaperController();
 
-    Q_PROPERTY(SaperModel* model READ model /*CONSTANT*/NOTIFY modelChanged)
+    Q_PROPERTY(SaperModel* model READ model NOTIFY modelChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
     SaperModel* model();
