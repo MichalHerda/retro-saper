@@ -47,3 +47,9 @@ void SaperModel::setGrid(int rows, int cols)
     m_cols = cols;
     qDebug() << "setGrid, rows: " << m_rows << ", cols: " << m_cols;
 }
+
+void SaperModel::setBombsNo(int bombs)
+{
+    m_bombs = bombs;
+    qDebug() << "setBombsNo, bombs: " << m_bombs;
+}

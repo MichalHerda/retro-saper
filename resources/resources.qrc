@@ -7,5 +7,6 @@
         <file>CellImage.png</file>
         <file>FlagImage.png</file>
         <file>NuclearField.png</file>
+        <file>RadiationWarning.png</file>
     </qresource>
 </RCC>

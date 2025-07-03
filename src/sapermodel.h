@@ -32,12 +32,14 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     void setGrid(int rows, int cols);
+    void setBombsNo(int bombs);
 
 signals:
 
 private:
     int m_rows = 10;
     int m_cols = 10;
+    int m_bombs = 7;
     QList<QList<CellData>> m_grid;
 };
 

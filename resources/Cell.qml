@@ -8,6 +8,8 @@ Item {
     property bool isMine: false
     property int neighborMines
 
+    property bool isInitialized: false
+
     states: [
         State {
             name: "covered"
@@ -38,7 +40,8 @@ Item {
         visible: false
         width: cell.width * 0.75
         height: cell.height * 0.75
-        source: "qrc:/FlagImage.png"
+        //source: "qrc:/FlagImage.png"
+        source: "qrc:/RadiationWarning.png"
     }
 
     MouseArea {

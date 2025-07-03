@@ -37,37 +37,38 @@ void SaperController::setDifficultyLevel(GameSettingsManager::DifficultyLevel _d
 
 void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel level)
 {
-    int rows, cols;
+    int rows, cols, bombs;
     switch (level) {
     case GameSettingsManager::DifficultyLevel::RadiationScavenge:
-        rows = 6; cols = 6;
+        rows = 6; cols = 6; bombs = 5;
         break;
     case GameSettingsManager::DifficultyLevel::WastelandWanderer:
-        rows = 12; cols = 12;
+        rows = 12; cols = 12; bombs = 15;
         break;
 
     case GameSettingsManager::DifficultyLevel::AshenSurvivor:
-        rows = 18; cols = 18;
+        rows = 18; cols = 18; bombs = 40;
         break;
 
     case GameSettingsManager::DifficultyLevel::NuclearOutlaw:
-        rows = 24; cols = 24;
+        rows = 24; cols = 24; bombs = 80;
         break;
 
     case GameSettingsManager::DifficultyLevel::RadstormVeteran:
-        rows = 36; cols = 36;
+        rows = 36; cols = 36; bombs = 205;
         break;
 
     case GameSettingsManager::DifficultyLevel::GammaReaper:
-        rows = 48; cols = 48;
+        rows = 48; cols = 48; bombs = 420;
         break;
 
     case GameSettingsManager::DifficultyLevel::DoomsdayOverlord:
-        rows = 60; cols = 60;
+        rows = 60; cols = 60; bombs = 725;
         break;
     }
 
     m_model->SaperModel::setGrid(rows, cols);
+    m_model->SaperModel::setBombsNo(bombs);
 }
 
 
