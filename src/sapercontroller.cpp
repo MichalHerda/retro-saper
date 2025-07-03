@@ -13,6 +13,11 @@ SaperController::~SaperController()
     delete m_model;
 }
 
+SaperModel *SaperController::model()
+{
+    return m_model;
+}
+
 int SaperController::getRowsNo()
 {
     return m_model->rowCount();
@@ -32,6 +37,7 @@ int SaperController::getBombsNo()
 void SaperController::placeBombsRandomly()
 {
     m_model->placeBombsRandomly(getBombsNo());
+    emit modelChanged();
 }
 
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
@@ -79,6 +85,7 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
 
     m_model->SaperModel::setGrid(rows, cols);
     m_model->SaperModel::setBombsNo(bombs);
+    emit modelChanged();
 }
 
 

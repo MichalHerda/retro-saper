@@ -16,8 +16,10 @@ public:
     explicit SaperController(QObject *parent = nullptr);
     ~SaperController();
 
+    Q_PROPERTY(SaperModel* model READ model /*CONSTANT*/NOTIFY modelChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
+    SaperModel* model();
     Q_INVOKABLE int getRowsNo();
     Q_INVOKABLE int getColsNo();
     int getBombsNo();
@@ -30,6 +32,7 @@ public:
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:
+    void modelChanged();
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel _difficultyLevel);
 
 private:

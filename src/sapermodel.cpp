@@ -19,16 +19,16 @@ QVariant SaperModel::data(const QModelIndex &index, int role) const {
     const CellData &cell = m_grid[index.row()][index.column()];
 
     switch (role) {
-    case IsRevealedRole:
-        return cell.isRevealed;
-    case IsFlaggedRole:
-        return cell.isFlagged;
-    case IsMineRole:
-        return cell.isMine;
-    case NeighborMinesRole:
-        return cell.neighborMines;
-    default:
-        return QVariant();
+        case IsRevealedRole:
+            return cell.isRevealed;
+        case IsFlaggedRole:
+            return cell.isFlagged;
+        case IsMineRole:
+            return cell.isMine;
+        case NeighborMinesRole:
+            return cell.neighborMines;
+        default:
+            return QVariant();
     }
 }
 
