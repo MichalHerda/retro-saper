@@ -43,8 +43,6 @@ QHash<int, QByteArray> SaperModel::roleNames() const {
 
 void SaperModel::setGrid(int rows, int cols)
 {
-    //beginResetModel();
-
     m_rows = rows;
     m_cols = cols;
     qDebug() << "setGrid, rows: " << m_rows << ", cols: " << m_cols;
@@ -54,8 +52,6 @@ void SaperModel::setGrid(int rows, int cols)
     for (int r = 0; r < m_rows; ++r) {
         m_grid[r].resize(m_cols);
     }
-
-    //endResetModel();
 }
 
 void SaperModel::setBombsNo(int bombs)
@@ -71,8 +67,6 @@ int SaperModel::getBombsNo()
 
 void SaperModel::placeBombsRandomly(int bombsNo)
 {
-    //beginResetModel();
-
     setGrid(m_rows, m_cols);
     // Tworzymy płaską listę wszystkich możliwych pozycji
     std::vector<std::pair<int, int>> positions;
@@ -94,14 +88,39 @@ void SaperModel::placeBombsRandomly(int bombsNo)
         m_grid[r][c].isMine = true;
     }
 
-    // Obliczamy liczbę sąsiednich bomb dla każdej komórki
-    for (int r = 0; r < m_rows; ++r) {
-        for (int c = 0; c < m_cols; ++c) {
-            if (!m_grid[r][c].isMine) {
-                //m_grid[r][c].neighborMines = countNeighborBombs(r, c);
+    updateAllNeighborCounts();
+}
+
+int SaperModel::countNeighborBombs(int row, int col) const
+{
+    int count = 0;
+    for (int dr = -1; dr <= 1; ++dr) {
+        for (int dc = -1; dc <= 1; ++dc) {
+            if (dr == 0 && dc == 0)
+                continue;
+
+            int nr = row + dr;
+            int nc = col + dc;
+
+            if (nr >= 0 && nr < m_rows && nc >= 0 && nc < m_cols) {
+                if (m_grid[nr][nc].isMine)
+                    ++count;
             }
         }
     }
+    return count;
+}
 
-    //endResetModel();
+void SaperModel::updateAllNeighborCounts()
+{
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            if (!m_grid[r][c].isMine) {
+                m_grid[r][c].neighborMines = countNeighborBombs(r, c);
+            }
+            else {
+                m_grid[r][c].neighborMines = -1;
+            }
+        }
+    }
 }

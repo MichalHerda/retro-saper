@@ -53,6 +53,22 @@ Item {
         source: "qrc:/BombImage.png"
     }
 
+    Rectangle {
+        id: neighborMinesRec
+        anchors.fill: parent
+        color: "transparent"
+        visible: cell.isRevealed && !cell.isMine && cell.neighborMines > 0
+        z: 1
+
+        Text {
+            anchors.centerIn: parent
+            text: cell.neighborMines
+            color: "white"
+            font.pixelSize: parent.width * 0.5
+            font.bold: true
+        }
+    }
+
     MouseArea {
         id: cellImageMouseArea
         acceptedButtons: Qt.LeftButton | Qt.RightButton
@@ -60,11 +76,11 @@ Item {
         onClicked: (mouse) => {
             if (mouse.button === Qt.RightButton) {
                 isFlagged = true
-                console.log("Right click!")
+                //console.log("Right click!")
             }
             else if (mouse.button === Qt.LeftButton) {
                 isRevealed = true
-                console.log("Left click!")
+                //console.log("Left click!")
             }
         }
     }

@@ -45,6 +45,9 @@ private:
     int m_cols = 18;
     int m_bombs = 40;
     QList<QList<CellData>> m_grid;
+
+    int countNeighborBombs(int row, int col) const;
+    void updateAllNeighborCounts();
 };
 
 #endif // SAPERMODEL_H
