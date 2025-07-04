@@ -5,6 +5,10 @@ SaperController::SaperController(QObject *parent)
 {
     m_model = new SaperModel(this);
 
+    m_model->SaperModel::setGrid(18, 18);
+    m_model->SaperModel::setBombsNo(40);
+    placeBombsRandomly();
+
     connect(this, &SaperController::difficultyLevelChanged, this, &SaperController::applyDifficultyLevel);
 }
 

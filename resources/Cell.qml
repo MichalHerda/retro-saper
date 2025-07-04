@@ -47,8 +47,9 @@ Item {
         id: bombImage
         anchors.centerIn: cell
         visible: cell.isMine
-        width: cell.width * 0.75
-        height: cell.height * 0.75
+        width: cell.width * 0.7
+        height: cell.height * 0.7
+        z: -1
         source: "qrc:/BombImage.png"
     }
 

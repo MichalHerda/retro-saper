@@ -41,9 +41,9 @@ public:
 signals:
 
 private:
-    int m_rows = 10;
-    int m_cols = 10;
-    int m_bombs = 7;
+    int m_rows = 18;
+    int m_cols = 18;
+    int m_bombs = 40;
     QList<QList<CellData>> m_grid;
 };
 

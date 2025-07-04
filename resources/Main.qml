@@ -11,6 +11,7 @@ Window {
     title: qsTr("S.A.P.E.R.")
 
     property bool gameStart: false
+    property Item minefieldInstance
 
     signal createMinefield()
 
@@ -52,7 +53,12 @@ Window {
 
     onCreateMinefield: {
         console.log("create minefieldComponent")
-        minefieldComponent.createObject(titleImageFrame)
+
+        if (minefieldInstance) {
+            console.log("Destroying previous minefield")
+            minefieldInstance.destroy()
+        }
+        minefieldInstance = minefieldComponent.createObject(titleImageFrame)
     }
 
     Timer {
