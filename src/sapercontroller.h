@@ -27,22 +27,21 @@ public:
     Q_INVOKABLE void placeBombsRandomly();
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
-    void setDifficultyLevel(GameSettingsManager::DifficultyLevel _difficultyLevel);
+    void setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel);
 
     bool getIsFirstMove();
-    void setIsFirstMove(bool isFirstMove);
-
-    GameSettingsManager::DifficultyLevel difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
+    void setIsFirstMove(bool isFirstMove);   
 
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:
     void modelChanged();
     void isFirstMoveChanged(bool isFirstMove);
-    void difficultyLevelChanged(GameSettingsManager::DifficultyLevel _difficultyLevel);
+    void difficultyLevelChanged(GameSettingsManager::DifficultyLevel difficultyLevel);
 
 private:
     bool m_isFirstMove = true;
+    GameSettingsManager::DifficultyLevel m_difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
     SaperModel* m_model;
     GameSettingsManager* m_settings;
 };

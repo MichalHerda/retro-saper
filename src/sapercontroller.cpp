@@ -46,13 +46,13 @@ void SaperController::placeBombsRandomly()
 
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
 {
-    return difficultyLevel;
+    return m_difficultyLevel;
 }
 
-void SaperController::setDifficultyLevel(GameSettingsManager::DifficultyLevel _difficultyLevel)
+void SaperController::setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel)
 {
-    difficultyLevel = _difficultyLevel;
-    emit difficultyLevelChanged(_difficultyLevel);
+    m_difficultyLevel = difficultyLevel;
+    emit difficultyLevelChanged(difficultyLevel);
 }
 
 bool SaperController::getIsFirstMove()

@@ -89,10 +89,9 @@ Item {
                     console.log("FirstMove! clean neighbors ")
                     SaperController.isFirstMove = false
                 }
-                //else {
-                   console.log("Left click! Reveal!")
-                   isRevealed = true
-               //}
+                console.log("Left click! Reveal!")
+                isRevealed = true
+
             }
         }
     }
