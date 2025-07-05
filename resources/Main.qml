@@ -67,7 +67,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            console.log("isFirstMove: ", SaperController.isFirstMove)
+            //console.log("isFirstMove: ", SaperController.isFirstMove)
         }
     }
 }

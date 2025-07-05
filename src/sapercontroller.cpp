@@ -49,6 +49,12 @@ void SaperController::revealCell(int row, int col)
     m_model->revealCell(row, col);
 }
 
+void SaperController::resetBoard()
+{
+    m_model->resetRevealed();
+    m_isFirstMove = true;
+}
+
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
 {
     return m_difficultyLevel;

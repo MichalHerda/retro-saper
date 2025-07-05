@@ -217,6 +217,19 @@ void SaperModel::revealCell(int row, int col)
     }
 }
 
+void SaperModel::resetRevealed()
+{
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            m_grid[r][c].isRevealed = false;
+            m_grid[r][c].isFlagged = false;
+            m_grid[r][c].isMine = false;
+            m_grid[r][c].neighborMines = 0;
+        }
+    }
+    emit dataChanged(index(0,0), index(m_rows-1, m_cols-1), {IsRevealedRole, IsFlaggedRole, IsMineRole, NeighborMinesRole});
+}
+
 int SaperModel::countNeighborBombs(int row, int col) const
 {
     int count = 0;
