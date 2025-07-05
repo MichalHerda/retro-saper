@@ -20,6 +20,9 @@ Rectangle {
       model: SaperController.model
 
       delegate: Cell {
+         required property int row
+         required property int column
+
          isMine: model.isMine
          isRevealed: model.isRevealed
          isFlagged: model.isFlagged

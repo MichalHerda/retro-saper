@@ -87,11 +87,16 @@ Item {
             else if (mouse.button === Qt.LeftButton) {
                 if(SaperController.isFirstMove) {
                     console.log("FirstMove! clean neighbors ")
+
+                    SaperController.placeBombsRandomly(row, column)
+                    model.isRevealed = true
                     SaperController.isFirstMove = false
                 }
-                console.log("Left click! Reveal!")
-                isRevealed = true
-
+                else {
+                    console.log("clicked at row", row, "column", column)
+                    console.log("Left click! Reveal!")
+                    model.isRevealed = true
+                }
             }
         }
     }

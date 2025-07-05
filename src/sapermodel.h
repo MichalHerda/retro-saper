@@ -31,12 +31,14 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
     QHash<int, QByteArray> roleNames() const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     void setGrid(int rows, int cols);
     void setBombsNo(int bombs);
     int getBombsNo();
-    void placeBombsRandomly(int bombsNo);
+    void placeBombsRandomly(int bombsNo, int safeRow, int safeCol);
 
 signals:
 

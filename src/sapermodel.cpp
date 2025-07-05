@@ -32,6 +32,51 @@ QVariant SaperModel::data(const QModelIndex &index, int role) const {
     }
 }
 
+bool SaperModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (!index.isValid())
+        return false;
+
+    CellData &cell = m_grid[index.row()][index.column()];
+
+    bool changed = false;
+
+    switch (role) {
+    case IsRevealedRole:
+        if (cell.isRevealed != value.toBool()) {
+            cell.isRevealed = value.toBool();
+            changed = true;
+        }
+        break;
+    case IsFlaggedRole:
+        if (cell.isFlagged != value.toBool()) {
+            cell.isFlagged = value.toBool();
+            changed = true;
+        }
+        break;
+    case IsMineRole:
+        if (cell.isMine != value.toBool()) {
+            cell.isMine = value.toBool();
+            changed = true;
+        }
+        break;
+    case NeighborMinesRole:
+        if (cell.neighborMines != value.toInt()) {
+            cell.neighborMines = value.toInt();
+            changed = true;
+        }
+        break;
+    default:
+        return false;
+    }
+
+    if (changed) {
+        emit dataChanged(index, index, {role});
+    }
+
+    return changed;
+}
+
 QHash<int, QByteArray> SaperModel::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[IsRevealedRole] = "isRevealed";
@@ -39,6 +84,14 @@ QHash<int, QByteArray> SaperModel::roleNames() const {
     roles[IsMineRole] = "isMine";
     roles[NeighborMinesRole] = "neighborMines";
     return roles;
+}
+
+Qt::ItemFlags SaperModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid()) {
+        return Qt::NoItemFlags;
+    }
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
 void SaperModel::setGrid(int rows, int cols)
@@ -64,7 +117,7 @@ int SaperModel::getBombsNo()
 {
     return m_bombs;
 }
-
+/*
 void SaperModel::placeBombsRandomly(int bombsNo)
 {
     setGrid(m_rows, m_cols);
@@ -89,6 +142,42 @@ void SaperModel::placeBombsRandomly(int bombsNo)
     }
 
     updateAllNeighborCounts();
+}
+*/
+void SaperModel::placeBombsRandomly(int bombsNo, int safeRow, int safeCol)
+{
+    beginResetModel();
+
+    setGrid(m_rows, m_cols);
+
+    // 1️⃣ Stwórz listę możliwych pozycji z wyłączeniem "safe zone"
+    std::vector<std::pair<int, int>> positions;
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            if (std::abs(r - safeRow) <= 1 && std::abs(c - safeCol) <= 1) {
+                // to pole jest w "bezpiecznej strefie" – pomijamy
+                continue;
+            }
+            positions.emplace_back(r, c);
+        }
+    }
+
+    // 2️⃣ Tasujemy
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(positions.begin(), positions.end(), gen);
+
+    // 3️⃣ Wybieramy bombCount pierwszych pól
+    for (int i = 0; i < bombsNo && i < static_cast<int>(positions.size()); ++i) {
+        int r = positions[i].first;
+        int c = positions[i].second;
+        m_grid[r][c].isMine = true;
+    }
+
+    // 4️⃣ Oblicz sąsiadów
+    updateAllNeighborCounts();
+
+    endResetModel();
 }
 
 int SaperModel::countNeighborBombs(int row, int col) const

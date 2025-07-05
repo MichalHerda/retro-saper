@@ -7,7 +7,7 @@ SaperController::SaperController(QObject *parent)
 
     m_model->SaperModel::setGrid(18, 18);
     m_model->SaperModel::setBombsNo(40);
-    placeBombsRandomly();
+    //placeBombsRandomly();
 
     connect(this, &SaperController::difficultyLevelChanged, this, &SaperController::applyDifficultyLevel);
 }
@@ -38,9 +38,9 @@ int SaperController::getBombsNo()
     return m_model->getBombsNo();
 }
 
-void SaperController::placeBombsRandomly()
+void SaperController::placeBombsRandomly(int safeRow, int safeCol)
 {
-    m_model->placeBombsRandomly(getBombsNo());
+    m_model->placeBombsRandomly(getBombsNo(), safeRow, safeCol);
     emit modelChanged();
 }
 
@@ -76,7 +76,7 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
     int rows, cols, bombs;
     switch (level) {
         case GameSettingsManager::DifficultyLevel::RadiationScavenge:
-            rows = 6; cols = 6; bombs = 5;
+            rows = 6; cols = 6; bombs = 4;
             break;
         case GameSettingsManager::DifficultyLevel::WastelandWanderer:
             rows = 12; cols = 12; bombs = 15;
@@ -105,7 +105,7 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
 
     m_model->SaperModel::setGrid(rows, cols);
     m_model->SaperModel::setBombsNo(bombs);
-    placeBombsRandomly();
+    //placeBombsRandomly();
     emit modelChanged();
 }
 

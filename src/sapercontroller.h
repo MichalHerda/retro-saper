@@ -24,7 +24,7 @@ public:
     Q_INVOKABLE int getRowsNo();
     Q_INVOKABLE int getColsNo();
     int getBombsNo();
-    Q_INVOKABLE void placeBombsRandomly();
+    Q_INVOKABLE void placeBombsRandomly(int safeRow, int safeCol);
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel);
