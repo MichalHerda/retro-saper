@@ -55,6 +55,22 @@ void SaperController::setDifficultyLevel(GameSettingsManager::DifficultyLevel _d
     emit difficultyLevelChanged(_difficultyLevel);
 }
 
+bool SaperController::getIsFirstMove()
+{
+    return m_isFirstMove;
+}
+
+void SaperController::setIsFirstMove(bool isFirstMove)
+{
+    if(isFirstMove == m_isFirstMove) {
+        qDebug() << "isFirstMove not changed";
+        return;
+    }
+
+    m_isFirstMove = isFirstMove;
+    emit isFirstMoveChanged(isFirstMove);
+}
+
 void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel level)
 {
     int rows, cols, bombs;

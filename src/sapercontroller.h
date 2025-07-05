@@ -17,6 +17,7 @@ public:
     ~SaperController();
 
     Q_PROPERTY(SaperModel* model READ model NOTIFY modelChanged)
+    Q_PROPERTY(bool isFirstMove READ getIsFirstMove WRITE setIsFirstMove NOTIFY isFirstMoveChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
     SaperModel* model();
@@ -27,15 +28,21 @@ public:
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel _difficultyLevel);
+
+    bool getIsFirstMove();
+    void setIsFirstMove(bool isFirstMove);
+
     GameSettingsManager::DifficultyLevel difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
 
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:
     void modelChanged();
+    void isFirstMoveChanged(bool isFirstMove);
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel _difficultyLevel);
 
 private:
+    bool m_isFirstMove = true;
     SaperModel* m_model;
     GameSettingsManager* m_settings;
 };

@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import SAPER 1.0
 
 Item {
     id: cell
@@ -75,12 +76,23 @@ Item {
         anchors.fill: parent
         onClicked: (mouse) => {
             if (mouse.button === Qt.RightButton) {
-                isFlagged = true
-                //console.log("Right click!")
+                if(SaperController.isFirstMove) {
+                   console.log("cannot flag! firstMove = true")
+                }
+                else {
+                    console.log("Right click! flag!")
+                    isFlagged = true
+                }
             }
             else if (mouse.button === Qt.LeftButton) {
-                isRevealed = true
-                //console.log("Left click!")
+                if(SaperController.isFirstMove) {
+                    console.log("FirstMove! clean neighbors ")
+                    SaperController.isFirstMove = false
+                }
+                //else {
+                   console.log("Left click! Reveal!")
+                   isRevealed = true
+               //}
             }
         }
     }
