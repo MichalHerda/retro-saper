@@ -44,6 +44,11 @@ void SaperController::placeBombsRandomly(int safeRow, int safeCol)
     emit modelChanged();
 }
 
+void SaperController::revealCell(int row, int col)
+{
+    m_model->revealCell(row, col);
+}
+
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
 {
     return m_difficultyLevel;

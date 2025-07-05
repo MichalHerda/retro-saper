@@ -180,6 +180,43 @@ void SaperModel::placeBombsRandomly(int bombsNo, int safeRow, int safeCol)
     endResetModel();
 }
 
+void SaperModel::revealCell(int row, int col)
+{
+    if (!isValidCell(row, col)) return;
+    if (m_grid[row][col].isRevealed || m_grid[row][col].isFlagged) return;
+
+    if (m_grid[row][col].isMine) {
+        // BOOM! game over logic could go here
+        m_grid[row][col].isRevealed = true;
+        emit dataChanged(index(row, col), index(row, col), {IsRevealedRole});
+        return;
+    }
+
+    // flood fill
+    std::queue<std::pair<int,int>> q;
+    q.push({row, col});
+
+    while (!q.empty()) {
+        auto [r, c] = q.front();
+        q.pop();
+
+        if (!isValidCell(r, c)) continue;
+        if (m_grid[r][c].isRevealed || m_grid[r][c].isFlagged) continue;
+
+        m_grid[r][c].isRevealed = true;
+        emit dataChanged(index(r, c), index(r, c), {IsRevealedRole});
+
+        if (m_grid[r][c].neighborMines == 0) {
+            for (int dr = -1; dr <= 1; ++dr) {
+                for (int dc = -1; dc <= 1; ++dc) {
+                    if (dr == 0 && dc == 0) continue;
+                    q.push({r + dr, c + dc});
+                }
+            }
+        }
+    }
+}
+
 int SaperModel::countNeighborBombs(int row, int col) const
 {
     int count = 0;
@@ -212,4 +249,9 @@ void SaperModel::updateAllNeighborCounts()
             }
         }
     }
+}
+
+bool SaperModel::isValidCell(int row, int col) const
+{
+    return row >= 0 && row < m_rows && col >= 0 && col < m_cols;
 }

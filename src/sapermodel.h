@@ -6,6 +6,8 @@
 #include <QMetaEnum>
 #include <random>
 #include <algorithm>
+#include <queue>
+
 
 struct CellData {
     bool isRevealed = false;
@@ -40,6 +42,8 @@ public:
     int getBombsNo();
     void placeBombsRandomly(int bombsNo, int safeRow, int safeCol);
 
+    void revealCell(int row, int col);
+
 signals:
 
 private:
@@ -50,6 +54,7 @@ private:
 
     int countNeighborBombs(int row, int col) const;
     void updateAllNeighborCounts();
+    bool isValidCell(int row, int col) const;
 };
 
 #endif // SAPERMODEL_H

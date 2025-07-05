@@ -25,6 +25,7 @@ public:
     Q_INVOKABLE int getColsNo();
     int getBombsNo();
     Q_INVOKABLE void placeBombsRandomly(int safeRow, int safeCol);
+    Q_INVOKABLE void revealCell(int row, int col);
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel);

@@ -24,7 +24,8 @@ Item {
         },
         State {
             name: "revealed"
-            when: cell.isRevealed
+            //when: cell.isRevealed
+            when: model.isRevealed
             PropertyChanges { target: cell;  }
         }
     ]
@@ -89,13 +90,15 @@ Item {
                     console.log("FirstMove! clean neighbors ")
 
                     SaperController.placeBombsRandomly(row, column)
-                    model.isRevealed = true
+                    //model.isRevealed = true
                     SaperController.isFirstMove = false
+                    SaperController.revealCell(row, column)
                 }
                 else {
                     console.log("clicked at row", row, "column", column)
                     console.log("Left click! Reveal!")
-                    model.isRevealed = true
+                    //model.isRevealed = true
+                    SaperController.revealCell(row, column)
                 }
             }
         }
