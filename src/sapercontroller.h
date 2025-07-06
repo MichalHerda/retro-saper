@@ -50,6 +50,8 @@ public:
 
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
+    void handleTimeLimitReached();
+
 signals:
     void modelChanged();
     void isFirstMoveChanged(bool isFirstMove);
@@ -64,7 +66,7 @@ private:
     GameSettingsManager::DifficultyLevel m_difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
     SaperModel* m_model;
     GameSettingsManager* m_settings;
-    GameTimer* m_gameTimer;
+    GameTimer* m_gameTimer;    
 };
 
 #endif // SAPERCONTROLLER_H

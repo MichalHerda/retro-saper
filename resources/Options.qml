@@ -15,20 +15,22 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         spacing: mainOptionsColumn.height * 0.025
 
-        Text {
+        Label {
             id: timerLabel
             width: mainOptionsColumn.width * 0.9
-            height: mainOptionsColumn.height * 0.15
+            height: mainOptionsColumn.height * 0.25
             anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
             color: "#FFD700"
-            font.pixelSize: Math.min(difficultyLevelLabel.height, difficultyLevelLabel.width) * 0.4
+            font.pixelSize: Math.min(timerLabel.height, timerLabel.width) * 0.4
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             property double elapsed: SaperController.gameTimer.elapsedSeconds
             text: {
                 var mins = Math.floor(elapsed / 60)
                 var secs = Math.floor(elapsed % 60)
                 var hundredths = Math.floor((elapsed - Math.floor(elapsed)) * 100)
                 return qsTr("%1:%2.%3")
-                    .arg(mins)
+                    .arg(mins < 10 ? "0" + mins : mins)
                     .arg(secs < 10 ? "0" + secs : secs)
                     .arg(hundredths < 10 ? "0" + hundredths : hundredths)
             }
@@ -105,7 +107,8 @@ Rectangle {
                 SaperController.isWin = false
                 SaperController.isGameOver = false
                 SaperController.resetBoard()
-                //SaperController.gameTimer.start()
+                SaperController.gameTimer.reset()
+                SaperController.gameTimer.start()
                 createMinefield()
             }
         }

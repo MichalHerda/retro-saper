@@ -46,5 +46,13 @@ double GameTimer::elapsedSeconds() const
 
 void GameTimer::updateElapsed()
 {
-    emit elapsedChanged(elapsedSeconds());
+    double elapsed = elapsedSeconds();
+    emit elapsedChanged(elapsed);
+
+    constexpr double maxTimeSeconds = 99 * 60 + 59 + 0.99;
+    //constexpr double maxTimeSeconds = 1 * 60 + 59 + 0.99;      //test
+    if (elapsed >= maxTimeSeconds) {
+        stop();
+        emit timeLimitReached();
+    }
 }

@@ -8,9 +8,9 @@ SaperController::SaperController(QObject *parent)
 
     m_model->SaperModel::setGrid(18, 18);
     m_model->SaperModel::setBombsNo(40);
-    //placeBombsRandomly();
 
     connect(this, &SaperController::difficultyLevelChanged, this, &SaperController::applyDifficultyLevel);
+    connect(m_gameTimer, &GameTimer::timeLimitReached, this, &SaperController::handleTimeLimitReached);
 }
 
 SaperController::~SaperController()
@@ -65,12 +65,14 @@ bool SaperController::checkForGameOver()
 {
     if(m_model->checkForWin()) {
         qDebug() << "controller, check for win, emit isGameOverChanged)";
+        m_gameTimer->stop();
         setIsWin(true);
         setIsGameOver(true);
         return true;
     }
     if(m_model->checkForLose()) {
         qDebug() << "controller, check for lose, emit isGameOverChanged)";
+        m_gameTimer->stop();
         setIsWin(false);
         setIsGameOver(true);
         return true;
@@ -119,9 +121,7 @@ void SaperController::setIsGameOver(bool isGameOver)
         return;
     }
 
-    qDebug() << "isGameOver1: " << m_isGameOver;
     m_isGameOver = isGameOver;
-    qDebug() << "isGameOver2: " << m_isGameOver;
     emit isGameOverChanged(isGameOver);
 }
 
@@ -181,8 +181,13 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
 
     m_model->SaperModel::setGrid(rows, cols);
     m_model->SaperModel::setBombsNo(bombs);
-    //placeBombsRandomly();
     emit modelChanged();
+}
+
+void SaperController::handleTimeLimitReached()
+{
+    setIsGameOver(true);
+    setIsWin(false);
 }
 
 

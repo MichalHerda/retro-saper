@@ -19,6 +19,7 @@ public:
     double elapsedSeconds() const;
 signals:
     void elapsedChanged(double elapsed);
+    void timeLimitReached();
 
 private slots:
     void updateElapsed();
