@@ -49,6 +49,11 @@ void SaperController::revealCell(int row, int col)
     m_model->revealCell(row, col);
 }
 
+void SaperController::setFlagged(int row, int col, bool flagged)
+{
+    m_model->setFlagged(row, col, flagged);
+}
+
 void SaperController::resetBoard()
 {
     m_model->resetRevealed();

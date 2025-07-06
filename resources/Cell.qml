@@ -19,7 +19,8 @@ Item {
         },
         State {
             name: "flagged"
-            when: cell.isFlagged
+            //when: cell.isFlagged
+            when: model.isFlagged
             PropertyChanges { target: flagImage; visible: true }
         },
         State {
@@ -82,7 +83,9 @@ Item {
                 }
                 else {
                     console.log("Right click! flag!")
-                    isFlagged = true
+                    //isFlagged = true
+                    //isFlagged = !isFlagged
+                    SaperController.setFlagged(row, column, !isFlagged)
                 }
             }
             else if (mouse.button === Qt.LeftButton) {
@@ -95,7 +98,7 @@ Item {
                     SaperController.revealCell(row, column)
                 }
                 else {
-                    console.log("clicked at row", row, "column", column)
+                    console.log("clicked at row", row, "column", column, "flagged: ", model.isFlagged)
                     console.log("Left click! Reveal!")
                     //model.isRevealed = true
                     SaperController.revealCell(row, column)

@@ -217,6 +217,15 @@ void SaperModel::revealCell(int row, int col)
     }
 }
 
+void SaperModel::setFlagged(int row, int col, bool flagged)
+{
+    if (!isValidCell(row, col))
+        return;
+    m_grid[row][col].isFlagged = flagged;
+    QModelIndex idx = index(row, col);
+    emit dataChanged(idx, idx, { IsFlaggedRole });
+}
+
 void SaperModel::resetRevealed()
 {
     for (int r = 0; r < m_rows; ++r) {

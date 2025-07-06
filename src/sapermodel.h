@@ -43,6 +43,7 @@ public:
     void placeBombsRandomly(int bombsNo, int safeRow, int safeCol);
 
     void revealCell(int row, int col);
+    void setFlagged(int row, int col, bool flagged);
     void resetRevealed();
 
 signals:
