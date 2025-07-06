@@ -239,6 +239,34 @@ void SaperModel::resetRevealed()
     emit dataChanged(index(0,0), index(m_rows-1, m_cols-1), {IsRevealedRole, IsFlaggedRole, IsMineRole, NeighborMinesRole});
 }
 
+bool SaperModel::checkForWin()
+{
+    qDebug() << "check for win! ";
+
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            const CellData &cell = m_grid[r][c];
+
+            if (cell.isMine) {
+                if (!cell.isFlagged) {
+                    qDebug() << "not flagged, checkForWin =  false";
+                    return false;
+                }
+            }
+            else {
+                if (!cell.isRevealed) {
+                    qDebug() << "not revealed, checkForWin =  false";
+                    return false;
+                }
+            }
+        }
+    }
+
+    //emit gameWon();
+    qDebug() << "win !";
+    return true;
+}
+
 int SaperModel::countNeighborBombs(int row, int col) const
 {
     int count = 0;

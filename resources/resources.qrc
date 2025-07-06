@@ -8,5 +8,6 @@
         <file>NuclearField.png</file>
         <file>RadiationWarning.png</file>
         <file>BombImage.png</file>
+        <file>GameResultDialog.qml</file>
     </qresource>
 </RCC>

@@ -23,6 +23,7 @@ qt_add_qml_module(appSAPER
         resources/Minefield.qml
         resources/Options.qml
         resources/Cell.qml
+        resources/GameResultDialog.qml
     SOURCES
         src/sapermodel.h
         src/sapermodel.cpp

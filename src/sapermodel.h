@@ -45,6 +45,7 @@ public:
     void revealCell(int row, int col);
     void setFlagged(int row, int col, bool flagged);
     void resetRevealed();
+    bool checkForWin();
 
 signals:
 

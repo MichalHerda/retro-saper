@@ -31,4 +31,12 @@ Rectangle {
          implicitHeight: minefieldGrid.height/ SaperController.getRowsNo()
       }
    }
+
+   GameResultDialog {
+      id: gameResultDialog
+      width: root.width * 0.7
+      height: root.height * 0.2
+      anchors.centerIn: root
+      visible: SaperController.isGameOver
+   }
 }

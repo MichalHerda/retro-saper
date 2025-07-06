@@ -87,6 +87,7 @@ Item {
                     //isFlagged = !isFlagged
                     SaperController.setFlagged(row, column, !isFlagged)
                 }
+                SaperController.checkForWin()
             }
             else if (mouse.button === Qt.LeftButton) {
                 if(SaperController.isFirstMove) {
@@ -103,6 +104,7 @@ Item {
                     //model.isRevealed = true
                     SaperController.revealCell(row, column)
                 }
+            SaperController.checkForWin()
             }
         }
     }

@@ -83,6 +83,7 @@ Rectangle {
                 console.log("start game button clicked")
                 gameStart = true;
                 //SaperController.isFirstMove = true
+                SaperController.isGameOver = false
                 SaperController.resetBoard()
                 createMinefield()
             }

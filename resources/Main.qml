@@ -68,6 +68,7 @@ Window {
         repeat: true
         onTriggered: {
             //console.log("isFirstMove: ", SaperController.isFirstMove)
+            console.log("isGameOver: ", SaperController.isGameOver)
         }
     }
 }

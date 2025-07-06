@@ -18,6 +18,7 @@ public:
 
     Q_PROPERTY(SaperModel* model READ model NOTIFY modelChanged)
     Q_PROPERTY(bool isFirstMove READ getIsFirstMove WRITE setIsFirstMove NOTIFY isFirstMoveChanged)
+    Q_PROPERTY(bool isGameOver READ getIsGameOver WRITE setIsGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
     SaperModel* model();
@@ -28,22 +29,28 @@ public:
     Q_INVOKABLE void revealCell(int row, int col);
     Q_INVOKABLE void setFlagged(int row, int col, bool flagged);
     Q_INVOKABLE void resetBoard();
+    Q_INVOKABLE bool checkForWin();
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel);
 
     bool getIsFirstMove();
-    void setIsFirstMove(bool isFirstMove);   
+    void setIsFirstMove(bool isFirstMove);
+
+    bool getIsGameOver();
+    void setIsGameOver(bool isGameOver);
 
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:
     void modelChanged();
     void isFirstMoveChanged(bool isFirstMove);
+    void isGameOverChanged(bool isGameOver);
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel difficultyLevel);
 
 private:
     bool m_isFirstMove = true;
+    bool m_isGameOver = false;
     GameSettingsManager::DifficultyLevel m_difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
     SaperModel* m_model;
     GameSettingsManager* m_settings;
