@@ -267,6 +267,20 @@ bool SaperModel::checkForWin()
     return true;
 }
 
+bool SaperModel::checkForLose()
+{
+    for (int r = 0; r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            const CellData &cell = m_grid[r][c];
+            if (cell.isMine && cell.isRevealed) {
+                qDebug() << "Mine revealed at" << r << c;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 int SaperModel::countNeighborBombs(int row, int col) const
 {
     int count = 0;

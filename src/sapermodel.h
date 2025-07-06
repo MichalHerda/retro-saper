@@ -46,6 +46,7 @@ public:
     void setFlagged(int row, int col, bool flagged);
     void resetRevealed();
     bool checkForWin();
+    bool checkForLose();
 
 signals:
 

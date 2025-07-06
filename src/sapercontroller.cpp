@@ -60,18 +60,23 @@ void SaperController::resetBoard()
     m_isFirstMove = true;
 }
 
-bool SaperController::checkForWin()
+bool SaperController::checkForGameOver()
 {
     if(m_model->checkForWin()) {
         qDebug() << "controller, check for win, emit isGameOverChanged)";
-        //emit isGameOverChanged(true);
+        setIsWin(true);
         setIsGameOver(true);
         return true;
     }
-    else {
-        qDebug() << "controller, check for win false ";
-        return false;
+    if(m_model->checkForLose()) {
+        qDebug() << "controller, check for lose, emit isGameOverChanged)";
+        setIsWin(false);
+        setIsGameOver(true);
+        return true;
     }
+
+    qDebug() << "controller, check for win/lose false ";
+    return false;
 }
 
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
@@ -117,6 +122,23 @@ void SaperController::setIsGameOver(bool isGameOver)
     m_isGameOver = isGameOver;
     qDebug() << "isGameOver2: " << m_isGameOver;
     emit isGameOverChanged(isGameOver);
+}
+
+bool SaperController::getIsWin()
+{
+    return m_isWin;
+}
+
+void SaperController::setIsWin(bool isWin)
+{
+    if(isWin == m_isGameOver) {
+        qDebug() << "isWin not changed";
+        return;
+    }
+
+    m_isWin = isWin;
+
+    emit isWinChanged(isWin);
 }
 
 void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel level)

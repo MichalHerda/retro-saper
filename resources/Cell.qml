@@ -77,34 +77,37 @@ Item {
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         anchors.fill: parent
         onClicked: (mouse) => {
-            if (mouse.button === Qt.RightButton) {
-                if(SaperController.isFirstMove) {
-                   console.log("cannot flag! firstMove = true")
+            if(!SaperController.isGameOver) {
+                if (mouse.button === Qt.RightButton) {
+                    if(SaperController.isFirstMove) {
+                       console.log("cannot flag! firstMove = true")
+                    }
+                    else {
+                        console.log("Right click! flag!")
+                        SaperController.setFlagged(row, column, !isFlagged)
+                    }
+                    SaperController.checkForGameOver()
                 }
-                else {
-                    console.log("Right click! flag!")
-                    //isFlagged = true
-                    //isFlagged = !isFlagged
-                    SaperController.setFlagged(row, column, !isFlagged)
-                }
-                SaperController.checkForWin()
-            }
-            else if (mouse.button === Qt.LeftButton) {
-                if(SaperController.isFirstMove) {
-                    console.log("FirstMove! clean neighbors ")
+                else if (mouse.button === Qt.LeftButton) {
+                    if(SaperController.isFirstMove) {
+                        console.log("FirstMove! clean neighbors ")
 
-                    SaperController.placeBombsRandomly(row, column)
-                    //model.isRevealed = true
-                    SaperController.isFirstMove = false
-                    SaperController.revealCell(row, column)
+                        SaperController.placeBombsRandomly(row, column)
+                        //model.isRevealed = true
+                        SaperController.isFirstMove = false
+                        SaperController.revealCell(row, column)
+                    }
+                    else {
+                        console.log("clicked at row", row, "column", column, "flagged: ", model.isFlagged)
+                        console.log("Left click! Reveal!")
+                        //model.isRevealed = true
+                        SaperController.revealCell(row, column)
+                    }
+                    SaperController.checkForGameOver()
                 }
-                else {
-                    console.log("clicked at row", row, "column", column, "flagged: ", model.isFlagged)
-                    console.log("Left click! Reveal!")
-                    //model.isRevealed = true
-                    SaperController.revealCell(row, column)
-                }
-            SaperController.checkForWin()
+            }
+            else {
+               console.log("gameOver, press START !")
             }
         }
     }
