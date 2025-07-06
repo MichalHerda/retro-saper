@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 #include "sapermodel.h"
 #include "gamesettingsmanager.h"
+#include "gametimer.h"
 
 class SaperController : public QObject
 {
@@ -17,6 +18,7 @@ public:
     ~SaperController();
 
     Q_PROPERTY(SaperModel* model READ model NOTIFY modelChanged)
+    Q_PROPERTY(GameTimer* gameTimer READ gameTimer CONSTANT)
     Q_PROPERTY(bool isFirstMove READ getIsFirstMove WRITE setIsFirstMove NOTIFY isFirstMoveChanged)
     Q_PROPERTY(bool isGameOver READ getIsGameOver WRITE setIsGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(bool isWin READ getIsWin WRITE setIsWin NOTIFY isWinChanged)
@@ -44,6 +46,8 @@ public:
     bool getIsWin();
     void setIsWin(bool isWin);
 
+    GameTimer* gameTimer() const;
+
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
 signals:
@@ -60,6 +64,7 @@ private:
     GameSettingsManager::DifficultyLevel m_difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
     SaperModel* m_model;
     GameSettingsManager* m_settings;
+    GameTimer* m_gameTimer;
 };
 
 #endif // SAPERCONTROLLER_H

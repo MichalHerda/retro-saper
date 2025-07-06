@@ -31,6 +31,8 @@ qt_add_qml_module(appSAPER
         src/gamesettingsmanager.cpp
         src/sapercontroller.h
         src/sapercontroller.cpp
+        src/gametimer.h
+        src/gametimer.cpp
     RESOURCES
         resources/resources.qrc
 )

@@ -4,6 +4,7 @@ SaperController::SaperController(QObject *parent)
     : QObject{parent}
 {
     m_model = new SaperModel(this);
+    m_gameTimer = new GameTimer(this);
 
     m_model->SaperModel::setGrid(18, 18);
     m_model->SaperModel::setBombsNo(40);
@@ -141,12 +142,17 @@ void SaperController::setIsWin(bool isWin)
     emit isWinChanged(isWin);
 }
 
+GameTimer *SaperController::gameTimer() const
+{
+    return m_gameTimer;
+}
+
 void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel level)
 {
     int rows, cols, bombs;
     switch (level) {
         case GameSettingsManager::DifficultyLevel::RadiationScavenge:
-            rows = 6; cols = 6; bombs = 4;
+            rows = 8; cols = 8; bombs = 6;
             break;
         case GameSettingsManager::DifficultyLevel::WastelandWanderer:
             rows = 12; cols = 12; bombs = 15;
