@@ -1,12 +1,14 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQmlIntegration/qqmlintegration.h>
-//#include "gamesettingsmanager.h"
 #include "sapercontroller.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    QCoreApplication::setOrganizationName("MH");
+    QCoreApplication::setApplicationName("SAPER");
 
     SaperController saperController;
 

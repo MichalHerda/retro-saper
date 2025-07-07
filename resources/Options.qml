@@ -11,9 +11,9 @@ Rectangle {
     Column {
         id: mainOptionsColumn
         width: mainOptionsFrame.width
-        height: mainOptionsFrame.height * 0.5
+        height: mainOptionsFrame.height * 0.9
         anchors.verticalCenter: parent.verticalCenter
-        spacing: mainOptionsColumn.height * 0.025
+        spacing: mainOptionsColumn.height * 0.015
 
         Label {
             id: timerLabel
@@ -25,6 +25,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             property double elapsed: SaperController.gameTimer.elapsedSeconds
+            font.bold: true
             text: {
                 var mins = Math.floor(elapsed / 60)
                 var secs = Math.floor(elapsed % 60)
@@ -39,7 +40,7 @@ Rectangle {
         Label {
             id: difficultyLevelLabel
             width: mainOptionsColumn.width * 0.9
-            height: mainOptionsColumn.height * 0.15
+            height: mainOptionsColumn.height * 0.1
             anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
 
             text: "game difficulty: "
@@ -53,7 +54,7 @@ Rectangle {
         ComboBox {
             id: difficultyLeveComboBox
             width: mainOptionsColumn.width * 0.9
-            height: mainOptionsColumn.height * 0.2
+            height: mainOptionsColumn.height * 0.1
             anchors.horizontalCenter: mainOptionsColumn.horizontalCenter
             property bool initialize: true
             model: [
@@ -86,13 +87,13 @@ Rectangle {
         Item {
             id: separator
             width: mainOptionsColumn.width
-            height: mainOptionsColumn.height * 0.25
+            height: mainOptionsColumn.height * 0.05
         }
 
         Button {
             id: startGameButton
             width: mainOptionsColumn.width * 0.9
-            height: mainOptionsColumn.height * 0.25
+            height: mainOptionsColumn.height * 0.1
             anchors.horizontalCenter: parent.horizontalCenter
             background: Rectangle {
                 anchors.fill: parent
@@ -103,13 +104,35 @@ Rectangle {
             onClicked: {
                 console.log("start game button clicked")
                 gameStart = true;
-                //SaperController.isFirstMove = true
                 SaperController.isWin = false
                 SaperController.isGameOver = false
                 SaperController.resetBoard()
                 SaperController.gameTimer.reset()
                 SaperController.gameTimer.start()
                 createMinefield()
+            }
+        }
+
+        Item {
+            id: separator2
+            width: mainOptionsColumn.width
+            height: mainOptionsColumn.height * 0.05
+        }
+
+        Button {
+            id: highScoresButton
+            width: mainOptionsColumn.width * 0.9
+            height: mainOptionsColumn.height * 0.1
+            anchors.horizontalCenter: parent.horizontalCenter
+            background: Rectangle {
+                anchors.fill: parent
+                color: startGameButton.pressed ? "#1C1C1C" : "#2E2E2E"
+            }
+            text: "HIGH SCORES"
+
+            onClicked: {
+                console.log("highScoresButton clicked")
+                highScoresPage.visible = !highScoresPage.visible
             }
         }
     }

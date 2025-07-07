@@ -9,5 +9,6 @@
         <file>RadiationWarning.png</file>
         <file>BombImage.png</file>
         <file>GameResultDialog.qml</file>
+        <file>HighScoresPage.qml</file>
     </qresource>
 </RCC>

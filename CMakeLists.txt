@@ -24,6 +24,7 @@ qt_add_qml_module(appSAPER
         resources/Options.qml
         resources/Cell.qml
         resources/GameResultDialog.qml
+        resources/HighScoresPage.qml
     SOURCES
         src/sapermodel.h
         src/sapermodel.cpp

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QMetaEnum>
+#include <QSettings>
 
 class GameSettingsManager : public QObject
 {
@@ -27,7 +28,7 @@ public:
 signals:
 
 private:
-
+    QSettings m_settings;
 };
 
 #endif // GAMESETTINGSMANAGER_H

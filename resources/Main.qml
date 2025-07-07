@@ -13,6 +13,8 @@ Window {
     property bool gameStart: false
     property Item minefieldInstance
 
+    property alias highScoresPage: highScoresPage
+
     signal createMinefield()
 
     GameSettingsManager {
@@ -41,6 +43,12 @@ Window {
                     width: titlePageRow.width * 0.75
                     height: titlePageRow.height
                 }
+            }
+
+            HighScoresPage {
+                id: highScoresPage
+                anchors.fill: parent
+                visible: false
             }
         }
 
