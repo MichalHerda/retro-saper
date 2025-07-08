@@ -32,11 +32,26 @@ Rectangle {
       }
    }
 
-   GameResultDialog {
-      id: gameResultDialog
-      width: root.width * 0.7
-      height: root.height * 0.2
-      anchors.centerIn: root
-      visible: SaperController.isGameOver
+   Component {
+      id: gameResultDialogComponent
+
+      GameResultDialog {
+         id: gameResultDialog
+         width: root.width * 0.7
+         height: root.height * 0.3
+         anchors.centerIn: root
+         visible: SaperController.isGameOver
+      }
+   }
+
+   Connections {
+       target: SaperController
+
+         function onIsGameOverChanged() {
+           console.log("is game over changed ! create gameResultComponent")
+           if (SaperController.isGameOver) {
+               var obj = gameResultDialogComponent.createObject(root);
+           }
+         }
    }
 }

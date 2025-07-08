@@ -50,6 +50,18 @@ void GameSettingsManager::addHighScore(DifficultyLevel diff, const HighScoreEntr
     saveHighScores();
 }
 
+bool GameSettingsManager::qualifiesForHighScores(int diff, int timeSeconds) const
+{
+    qDebug() << "qualifiesForHighScores";
+    auto difficulty = static_cast<DifficultyLevel>(diff);
+    const auto &list = m_highScores.value(difficulty);
+
+    if (list.size() < 20) {
+        return true;  // lista niepełna, zawsze się kwalifikuje
+    }
+
+    return timeSeconds < list.last().timeSeconds;
+}
 
 void GameSettingsManager::addHighScoreInvokable(int diff, const QString &playerName, int timeSeconds)
 {
@@ -70,4 +82,32 @@ QVariantList GameSettingsManager::getHighScores(int diff) const
     }
     return list;
 }
+/*
+bool GameSettingsManager::tryAddHighScore(int diff, const QString &playerName, int timeSeconds)
+{
+    auto difficulty = static_cast<DifficultyLevel>(diff);
+    auto &list = m_highScores[difficulty];
 
+    if (list.size() < 20 || timeSeconds < list.last().timeSeconds) {
+        // kwalifikuje się - dodaj
+        HighScoreEntry entry;
+        entry.playerName = playerName;
+        entry.timeSeconds = timeSeconds;
+        entry.achievedAt = QDateTime::currentDateTime();
+
+        list.append(entry);
+        std::sort(list.begin(), list.end(), [](const HighScoreEntry &a, const HighScoreEntry &b) {
+            return a.timeSeconds < b.timeSeconds;
+        });
+
+        if (list.size() > 20) {
+            list = list.mid(0, 20);
+        }
+
+        saveHighScores();
+        return true;
+    }
+
+    return false;
+}
+*/

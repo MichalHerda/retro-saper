@@ -126,7 +126,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             background: Rectangle {
                 anchors.fill: parent
-                color: startGameButton.pressed ? "#1C1C1C" : "#2E2E2E"
+                color: highScoresButton.pressed ? "#1C1C1C" : "#2E2E2E"
             }
             text: "HIGH SCORES"
 

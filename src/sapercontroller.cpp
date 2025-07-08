@@ -152,7 +152,7 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
     int rows, cols, bombs;
     switch (level) {
         case GameSettingsManager::DifficultyLevel::RadiationScavenge:
-            rows = 8; cols = 8; bombs = 6;
+            rows = 8; cols = 8; bombs = 3;
             break;
         case GameSettingsManager::DifficultyLevel::WastelandWanderer:
             rows = 12; cols = 12; bombs = 15;

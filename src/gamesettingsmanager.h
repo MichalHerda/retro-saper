@@ -51,9 +51,11 @@ public:
 
     void saveHighScores();
     void loadHighScores();
-    Q_INVOKABLE void addHighScore(DifficultyLevel diff, const HighScoreEntry &entry);
+    void addHighScore(DifficultyLevel diff, const HighScoreEntry &entry);
+    Q_INVOKABLE bool qualifiesForHighScores(int diff, int timeSeconds) const;
     Q_INVOKABLE void addHighScoreInvokable(int diff, const QString &playerName, int timeSeconds);
     Q_INVOKABLE QVariantList getHighScores(int diff) const;
+    //Q_INVOKABLE bool tryAddHighScore(int diff, const QString &playerName, int timeSeconds);
 
 signals:
 

@@ -51,9 +51,9 @@ public:
 signals:
 
 private:
-    int m_rows = 18;
-    int m_cols = 18;
-    int m_bombs = 40;
+    int m_rows = 8;
+    int m_cols = 8;
+    int m_bombs = 3;
     QList<QList<CellData>> m_grid;
 
     int countNeighborBombs(int row, int col) const;
