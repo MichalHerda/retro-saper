@@ -22,6 +22,7 @@ public:
     Q_PROPERTY(bool isFirstMove READ getIsFirstMove WRITE setIsFirstMove NOTIFY isFirstMoveChanged)
     Q_PROPERTY(bool isGameOver READ getIsGameOver WRITE setIsGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(bool isWin READ getIsWin WRITE setIsWin NOTIFY isWinChanged)
+    Q_PROPERTY(int lastGameTime READ getLastGameTime WRITE setLastGameTime NOTIFY lastGameTimeChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
 
     SaperModel* model();
@@ -46,6 +47,9 @@ public:
     bool getIsWin();
     void setIsWin(bool isWin);
 
+    double getLastGameTime();
+    void setLastGameTime(double timeSeconds);
+
     GameTimer* gameTimer() const;
 
 public slots:
@@ -57,12 +61,14 @@ signals:
     void isFirstMoveChanged(bool isFirstMove);
     void isGameOverChanged(bool isGameOver);
     void isWinChanged(bool isWin);
+    void lastGameTimeChanged(int timeSeconds);
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel difficultyLevel);
 
 private:
     bool m_isFirstMove = true;
     bool m_isGameOver = false;
     bool m_isWin = false;
+    double m_lastGameTime = 0;
     GameSettingsManager::DifficultyLevel m_difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
     SaperModel* m_model;
     GameSettingsManager* m_settings;

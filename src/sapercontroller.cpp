@@ -66,6 +66,9 @@ bool SaperController::checkForGameOver()
     if(m_model->checkForWin()) {
         qDebug() << "controller, check for win, emit isGameOverChanged)";
         m_gameTimer->stop();
+        //setLastGameTime(static_cast<int>(m_gameTimer->elapsedSeconds()));
+        setLastGameTime(m_gameTimer->elapsedSeconds());
+        qDebug() << "controller, last game time: " << getLastGameTime();
         setIsWin(true);
         setIsGameOver(true);
         return true;
@@ -140,6 +143,17 @@ void SaperController::setIsWin(bool isWin)
     m_isWin = isWin;
 
     emit isWinChanged(isWin);
+}
+
+double SaperController::getLastGameTime()
+{
+    return m_lastGameTime;
+}
+
+void SaperController::setLastGameTime(double timeSeconds)
+{
+    m_lastGameTime = timeSeconds;
+    emit lastGameTimeChanged(m_lastGameTime);
 }
 
 GameTimer *SaperController::gameTimer() const
