@@ -7,6 +7,7 @@ Rectangle {
     color: "blue"
 
     property int selectedDifficulty: GameSettingsManager.DifficultyLevel.AshenSurvivor
+    property var highScores: []
 
     Column {
         id: highScoresColumn
@@ -47,6 +48,11 @@ Rectangle {
             onCurrentIndexChanged: {
                 selectedDifficulty = model[currentIndex].value
                 console.log("Selected difficulty:", model[currentIndex].text, selectedDifficulty)
+                SaperController.loadHighScoresForDifficulty(selectedDifficulty)
+                //highScores = SaperController.highScoresForDifficulty(selectedDifficulty)
+                var result = SaperController.highScoresForDifficulty(selectedDifficulty)
+                console.log("Fetched high scores:", JSON.stringify(result))
+                highScores = result
             }
 
             Component.onCompleted: {
@@ -69,9 +75,41 @@ Rectangle {
             radius: 10
 
             Text {
-                //anchors.centerIn: parent
                 color: "white"
                 text: "List of best scores for difficulty: " + difficultyComboBox.currentText
+            }
+
+            ListView {
+                anchors.fill: parent
+                model: highScores //SaperController.highScoresForDifficulty(selectedDifficulty)
+
+                Component.onCompleted: {
+                    console.log("SaperController.highScores:", JSON.stringify(SaperController.highScoresForDifficulty(selectedDifficulty)))
+                }
+
+                delegate: Rectangle {
+                    height: 40
+                    width: parent.width
+                    color: index % 2 === 0 ? "navy" : "darkblue"
+
+                    Row {
+                        spacing: 10
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        Text {
+                            text: modelData.playerName
+                            color: "white"
+                        }
+                        Text {
+                            text: Qt.formatDateTime(new Date(modelData.achievedAt), "yyyy-MM-dd hh:mm:ss")
+                            color: "white"
+                        }
+                        Text {
+                            text: (modelData.timeSeconds !== undefined ? modelData.timeSeconds.toFixed(2) + " s" : "")
+                            color: "white"
+                        }
+                    }
+                }
             }
         }
     }

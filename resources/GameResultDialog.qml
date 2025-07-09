@@ -86,7 +86,7 @@ Rectangle {
                 onClicked: {
                     if (playerName.length > 0) {
                         gameSettingsManager.addHighScoreInvokable(
-                            SaperController.difficulty,
+                            SaperController.difficultyLevel,
                             playerName,
                             SaperController.lastGameTime
                         );

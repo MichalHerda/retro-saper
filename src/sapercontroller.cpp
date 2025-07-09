@@ -5,6 +5,7 @@ SaperController::SaperController(QObject *parent)
 {
     m_model = new SaperModel(this);
     m_gameTimer = new GameTimer(this);
+    m_settings = new GameSettingsManager(this);
 
     m_model->SaperModel::setGrid(18, 18);
     m_model->SaperModel::setBombsNo(40);
@@ -85,6 +86,20 @@ bool SaperController::checkForGameOver()
     return false;
 }
 
+QVariantList SaperController::highScoresForDifficulty(int difficulty) const
+{
+    QVariantList all = m_settings->getHighScores(difficulty);
+    QVariantList filtered;
+
+    for (const QVariant &v : all) {
+        QVariantMap m = v.toMap();
+        if (m.value("difficultyLevel").toInt() == difficulty)
+            filtered << m;
+    }
+
+    return filtered;
+}
+
 GameSettingsManager::DifficultyLevel SaperController::getDifficultyLevel()
 {
     return m_difficultyLevel;
@@ -161,6 +176,14 @@ GameTimer *SaperController::gameTimer() const
     return m_gameTimer;
 }
 
+QVariantList SaperController::getHighScores()
+{
+    QSettings settings;
+    QVariant value = settings.value("highscores");
+
+    return value.toList();
+}
+
 void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel level)
 {
     int rows, cols, bombs;
@@ -169,11 +192,11 @@ void SaperController::applyDifficultyLevel(GameSettingsManager::DifficultyLevel 
             rows = 8; cols = 8; bombs = 3;
             break;
         case GameSettingsManager::DifficultyLevel::WastelandWanderer:
-            rows = 12; cols = 12; bombs = 15;
+            rows = 12; cols = 12; bombs = 5;
             break;
 
         case GameSettingsManager::DifficultyLevel::AshenSurvivor:
-            rows = 18; cols = 18; bombs = 40;
+            rows = 18; cols = 18; bombs = 8;
             break;
 
         case GameSettingsManager::DifficultyLevel::NuclearOutlaw:
@@ -202,6 +225,15 @@ void SaperController::handleTimeLimitReached()
 {
     setIsGameOver(true);
     setIsWin(false);
+}
+
+void SaperController::loadHighScoresForDifficulty(int difficulty)
+{
+    if (!m_settings) {
+        return;
+    }
+    m_highScores = m_settings->getHighScores(difficulty);
+    emit highScoresChanged(m_highScores);
 }
 
 

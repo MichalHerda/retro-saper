@@ -65,10 +65,12 @@ bool GameSettingsManager::qualifiesForHighScores(int diff, int timeSeconds) cons
 
 void GameSettingsManager::addHighScoreInvokable(int diff, const QString &playerName, int timeSeconds)
 {
+    qDebug() << "addHighScoreInvokable, diff: " << diff << ", playerName: " << playerName << ", timeSeconds: " << timeSeconds;
     HighScoreEntry entry;
     entry.playerName = playerName;
     entry.timeSeconds = timeSeconds;
     entry.achievedAt = QDateTime::currentDateTime();
+    entry.difficultyLevel = diff;
 
     addHighScore(static_cast<DifficultyLevel>(diff), entry);
 }
@@ -82,32 +84,4 @@ QVariantList GameSettingsManager::getHighScores(int diff) const
     }
     return list;
 }
-/*
-bool GameSettingsManager::tryAddHighScore(int diff, const QString &playerName, int timeSeconds)
-{
-    auto difficulty = static_cast<DifficultyLevel>(diff);
-    auto &list = m_highScores[difficulty];
 
-    if (list.size() < 20 || timeSeconds < list.last().timeSeconds) {
-        // kwalifikuje się - dodaj
-        HighScoreEntry entry;
-        entry.playerName = playerName;
-        entry.timeSeconds = timeSeconds;
-        entry.achievedAt = QDateTime::currentDateTime();
-
-        list.append(entry);
-        std::sort(list.begin(), list.end(), [](const HighScoreEntry &a, const HighScoreEntry &b) {
-            return a.timeSeconds < b.timeSeconds;
-        });
-
-        if (list.size() > 20) {
-            list = list.mid(0, 20);
-        }
-
-        saveHighScores();
-        return true;
-    }
-
-    return false;
-}
-*/

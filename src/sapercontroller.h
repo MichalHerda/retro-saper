@@ -24,6 +24,7 @@ public:
     Q_PROPERTY(bool isWin READ getIsWin WRITE setIsWin NOTIFY isWinChanged)
     Q_PROPERTY(int lastGameTime READ getLastGameTime WRITE setLastGameTime NOTIFY lastGameTimeChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
+    Q_PROPERTY(QVariantList highScores READ getHighScores NOTIFY highScoresChanged)
 
     SaperModel* model();
     Q_INVOKABLE int getRowsNo();
@@ -34,6 +35,7 @@ public:
     Q_INVOKABLE void setFlagged(int row, int col, bool flagged);
     Q_INVOKABLE void resetBoard();
     Q_INVOKABLE bool checkForGameOver();
+    Q_INVOKABLE QVariantList highScoresForDifficulty(int difficulty) const;
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel);
@@ -51,10 +53,12 @@ public:
     void setLastGameTime(double timeSeconds);
 
     GameTimer* gameTimer() const;
+    QVariantList getHighScores();
 
 public slots:
     void applyDifficultyLevel(GameSettingsManager::DifficultyLevel level);
     void handleTimeLimitReached();
+    void loadHighScoresForDifficulty(int difficulty);
 
 signals:
     void modelChanged();
@@ -63,6 +67,7 @@ signals:
     void isWinChanged(bool isWin);
     void lastGameTimeChanged(int timeSeconds);
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel difficultyLevel);
+    void highScoresChanged(QVariantList highScores);
 
 private:
     bool m_isFirstMove = true;
@@ -72,7 +77,8 @@ private:
     GameSettingsManager::DifficultyLevel m_difficultyLevel = GameSettingsManager::DifficultyLevel::AshenSurvivor;
     SaperModel* m_model;
     GameSettingsManager* m_settings;
-    GameTimer* m_gameTimer;    
+    GameTimer* m_gameTimer;
+    QVariantList m_highScores;
 };
 
 #endif // SAPERCONTROLLER_H
