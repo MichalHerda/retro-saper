@@ -50,7 +50,7 @@ void GameSettingsManager::addHighScore(DifficultyLevel diff, const HighScoreEntr
     saveHighScores();
 }
 
-bool GameSettingsManager::qualifiesForHighScores(int diff, int timeSeconds) const
+bool GameSettingsManager::qualifiesForHighScores(int diff, double timeSeconds) const
 {
     qDebug() << "qualifiesForHighScores";
     auto difficulty = static_cast<DifficultyLevel>(diff);
@@ -63,7 +63,7 @@ bool GameSettingsManager::qualifiesForHighScores(int diff, int timeSeconds) cons
     return timeSeconds < list.last().timeSeconds;
 }
 
-void GameSettingsManager::addHighScoreInvokable(int diff, const QString &playerName, int timeSeconds)
+void GameSettingsManager::addHighScoreInvokable(int diff, const QString &playerName, double timeSeconds)
 {
     qDebug() << "addHighScoreInvokable, diff: " << diff << ", playerName: " << playerName << ", timeSeconds: " << timeSeconds;
     HighScoreEntry entry;

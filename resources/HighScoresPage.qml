@@ -4,32 +4,32 @@ import SAPER 1.0
 
 Rectangle {
     id: highScoresPage
-    color: "blue"
+    color: "#1a0f0b"
 
     property int selectedDifficulty: GameSettingsManager.DifficultyLevel.AshenSurvivor
     property var highScores: []
 
     Column {
         id: highScoresColumn
-        width: highScoresPage.width * 0.8
+        width: highScoresPage.width * 0.95
         height: highScoresPage.height * 0.9
         anchors.centerIn: parent
         spacing: highScoresPage.height * 0.025
 
         Label {
             id: selectLabel
-            width: highScoresColumn.width * 0.9
-            height: highScoresColumn.height * 0.1
-            text: "Select difficulty:"
+            width: highScoresColumn.width
+            height: highScoresColumn.height * 0.03
+            text: qsTr("Show high scores for difficulty level:")
             color: "white"
-            font.pixelSize: Math.min(selectLabel.height, selectLabel.width) * 0.4
+            font.pixelSize: Math.min(selectLabel.height, selectLabel.width) * 0.9
             horizontalAlignment: Text.AlignHCenter
         }
 
         ComboBox {
             id: difficultyComboBox
-            width: highScoresColumn.width * 0.9
-            height: highScoresColumn.height * 0.1
+            width: highScoresColumn.width * 0.6
+            height: highScoresColumn.height * 0.075
 
             anchors.horizontalCenter: highScoresColumn.horizontalCenter
 
@@ -49,7 +49,6 @@ Rectangle {
                 selectedDifficulty = model[currentIndex].value
                 console.log("Selected difficulty:", model[currentIndex].text, selectedDifficulty)
                 SaperController.loadHighScoresForDifficulty(selectedDifficulty)
-                //highScores = SaperController.highScoresForDifficulty(selectedDifficulty)
                 var result = SaperController.highScoresForDifficulty(selectedDifficulty)
                 console.log("Fetched high scores:", JSON.stringify(result))
                 highScores = result
@@ -68,10 +67,10 @@ Rectangle {
 
         Rectangle {
             id: highScoresFrame
-            width: highScoresColumn.width * 0.9
-            height: highScoresColumn.height * 0.7
+            width: highScoresColumn.width
+            height: highScoresColumn.height * 0.85
             anchors.horizontalCenter: highScoresColumn.horizontalCenter
-            color: "darkblue"
+            color: "#000000" //"darkblue"
             radius: 10
 
             Text {
@@ -81,32 +80,64 @@ Rectangle {
 
             ListView {
                 anchors.fill: parent
-                model: highScores //SaperController.highScoresForDifficulty(selectedDifficulty)
+                model: highScores
 
                 Component.onCompleted: {
                     console.log("SaperController.highScores:", JSON.stringify(SaperController.highScoresForDifficulty(selectedDifficulty)))
                 }
 
                 delegate: Rectangle {
-                    height: 40
-                    width: parent.width
-                    color: index % 2 === 0 ? "navy" : "darkblue"
+                    height: highScoresFrame.height * 0.1
+                    width: highScoresFrame.width
+                    color: "#000000"
 
                     Row {
-                        spacing: 10
-                        anchors.verticalCenter: parent.verticalCenter
+                        id: highScoreRow
+                        width: highScoresFrame.width
+                        //anchors.verticalCenter: parent.verticalCenter
+
+                        Item {
+                            id: separator1
+                            width: highScoreRow.width * 0.025
+                        }
 
                         Text {
+                            id: playerNameText
                             text: modelData.playerName
-                            color: "white"
+                            width: highScoreRow.width * 0.5
+                            color: "#FFD700"
+                            horizontalAlignment: Text.AlignHCenter
                         }
-                        Text {
-                            text: Qt.formatDateTime(new Date(modelData.achievedAt), "yyyy-MM-dd hh:mm:ss")
-                            color: "white"
+
+                        Item {
+                            id: separator2
+                            width: highScoreRow.width * 0.025
                         }
+
                         Text {
+                            id: resultDateText
+                            text: Qt.formatDateTime(new Date(modelData.achievedAt), "yyyy-MM-dd" ) //" hh:mm:ss")
+                            width: highScoreRow.width * 0.2
+                            color: "#FFD700"
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+
+                        Item {
+                            id: separator3
+                            width: highScoreRow.width * 0.025
+                        }
+
+                        Text {
+                            id: resultTimeText
                             text: (modelData.timeSeconds !== undefined ? modelData.timeSeconds.toFixed(2) + " s" : "")
-                            color: "white"
+                            width: highScoreRow.width * 0.2
+                            color: "#FFD700"
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+
+                        Item {
+                            id: separator4
+                            width: highScoreRow.width * 0.025
                         }
                     }
                 }

@@ -22,7 +22,7 @@ public:
     Q_PROPERTY(bool isFirstMove READ getIsFirstMove WRITE setIsFirstMove NOTIFY isFirstMoveChanged)
     Q_PROPERTY(bool isGameOver READ getIsGameOver WRITE setIsGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(bool isWin READ getIsWin WRITE setIsWin NOTIFY isWinChanged)
-    Q_PROPERTY(int lastGameTime READ getLastGameTime WRITE setLastGameTime NOTIFY lastGameTimeChanged)
+    Q_PROPERTY(double lastGameTime READ getLastGameTime WRITE setLastGameTime NOTIFY lastGameTimeChanged)
     Q_PROPERTY(GameSettingsManager::DifficultyLevel difficultyLevel READ getDifficultyLevel WRITE setDifficultyLevel NOTIFY difficultyLevelChanged)
     Q_PROPERTY(QVariantList highScores READ getHighScores NOTIFY highScoresChanged)
 
@@ -65,7 +65,7 @@ signals:
     void isFirstMoveChanged(bool isFirstMove);
     void isGameOverChanged(bool isGameOver);
     void isWinChanged(bool isWin);
-    void lastGameTimeChanged(int timeSeconds);
+    void lastGameTimeChanged(double timeSeconds);
     void difficultyLevelChanged(GameSettingsManager::DifficultyLevel difficultyLevel);
     void highScoresChanged(QVariantList highScores);
 

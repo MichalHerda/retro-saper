@@ -11,7 +11,7 @@ struct HighScoreEntry
 {
     QString playerName;
     QDateTime achievedAt;
-    int timeSeconds;
+    double timeSeconds;
     int difficultyLevel;
 
     QVariantMap toVariantMap() const {
@@ -27,7 +27,7 @@ struct HighScoreEntry
         HighScoreEntry entry;
         entry.playerName = map.value("playerName").toString();
         entry.achievedAt = QDateTime::fromString(map.value("achievedAt").toString(), Qt::ISODate);
-        entry.timeSeconds = map.value("timeSeconds").toInt();
+        entry.timeSeconds = map.value("timeSeconds").toDouble();
         entry.difficultyLevel = map.value("difficultyLevel").toInt();
         return entry;
     }
@@ -55,8 +55,8 @@ public:
     void saveHighScores();
     void loadHighScores();
     void addHighScore(DifficultyLevel diff, const HighScoreEntry &entry);
-    Q_INVOKABLE bool qualifiesForHighScores(int diff, int timeSeconds) const;
-    Q_INVOKABLE void addHighScoreInvokable(int diff, const QString &playerName, int timeSeconds);
+    Q_INVOKABLE bool qualifiesForHighScores(int diff, double timeSeconds) const;
+    Q_INVOKABLE void addHighScoreInvokable(int diff, const QString &playerName, double timeSeconds);
     Q_INVOKABLE QVariantList getHighScores(int diff) const;
 
 signals:
