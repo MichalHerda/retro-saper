@@ -9,6 +9,18 @@ Rectangle {
     property int selectedDifficulty: GameSettingsManager.DifficultyLevel.AshenSurvivor
     property var highScores: []
 
+    function formatTime(seconds) {
+        let mins = Math.floor(seconds / 60);
+        let secs = Math.floor(seconds % 60);
+        let millis = Math.floor((seconds - Math.floor(seconds)) * 1000);
+
+        let minStr = mins.toString().padStart(2, "0");
+        let secStr = secs.toString().padStart(2, "0");
+        let msStr = millis.toString().padStart(3, "0");
+
+        return minStr + ":" + secStr + ":" + msStr;
+    }
+
     Column {
         id: highScoresColumn
         width: highScoresPage.width * 0.95
@@ -65,79 +77,96 @@ Rectangle {
             }
         }
 
+        Item {
+            id: columnSeparator
+            height: highScoresColumn.height * 0.1
+        }
+
         Rectangle {
             id: highScoresFrame
             width: highScoresColumn.width
             height: highScoresColumn.height * 0.85
             anchors.horizontalCenter: highScoresColumn.horizontalCenter
-            color: "#000000" //"darkblue"
+            color: "#000000"
             radius: 10
 
-            Text {
-                color: "white"
-                text: "List of best scores for difficulty: " + difficultyComboBox.currentText
-            }
-
-            ListView {
+            ScrollView {
                 anchors.fill: parent
-                model: highScores
+                clip: true
 
-                Component.onCompleted: {
-                    console.log("SaperController.highScores:", JSON.stringify(SaperController.highScoresForDifficulty(selectedDifficulty)))
-                }
+                ListView {
+                    width: parent.width
+                    height: parent.height
+                    model: highScores
 
-                delegate: Rectangle {
-                    height: highScoresFrame.height * 0.1
-                    width: highScoresFrame.width
-                    color: "#000000"
+                    Component.onCompleted: {
+                        console.log("SaperController.highScores:", JSON.stringify(SaperController.highScoresForDifficulty(selectedDifficulty)))
+                    }
 
-                    Row {
-                        id: highScoreRow
+                    delegate: Rectangle {
+                        height: highScoresFrame.height * 0.1
                         width: highScoresFrame.width
-                        //anchors.verticalCenter: parent.verticalCenter
+                        color: "#000000"
 
-                        Item {
-                            id: separator1
-                            width: highScoreRow.width * 0.025
-                        }
+                        Row {
+                            id: highScoreRow
+                            width: highScoresFrame.width
 
-                        Text {
-                            id: playerNameText
-                            text: modelData.playerName
-                            width: highScoreRow.width * 0.5
-                            color: "#FFD700"
-                            horizontalAlignment: Text.AlignHCenter
-                        }
+                            Item {
+                                id: separator0
+                                width: highScoreRow.width * 0.025
+                            }
 
-                        Item {
-                            id: separator2
-                            width: highScoreRow.width * 0.025
-                        }
+                            Text {
+                                text: (index + 1).toString()
+                                width: highScoreRow.width * 0.05
+                                color: "#FFD700"
+                                horizontalAlignment: Text.AlignHCenter
+                            }
 
-                        Text {
-                            id: resultDateText
-                            text: Qt.formatDateTime(new Date(modelData.achievedAt), "yyyy-MM-dd" ) //" hh:mm:ss")
-                            width: highScoreRow.width * 0.2
-                            color: "#FFD700"
-                            horizontalAlignment: Text.AlignHCenter
-                        }
+                            Item {
+                                id: separator1
+                                width: highScoreRow.width * 0.025
+                            }
 
-                        Item {
-                            id: separator3
-                            width: highScoreRow.width * 0.025
-                        }
+                            Text {
+                                id: playerNameText
+                                text: modelData.playerName
+                                width: highScoreRow.width * 0.5
+                                color: "#FFD700"
+                                horizontalAlignment: Text.AlignHCenter
+                            }
 
-                        Text {
-                            id: resultTimeText
-                            text: (modelData.timeSeconds !== undefined ? modelData.timeSeconds.toFixed(2) + " s" : "")
-                            width: highScoreRow.width * 0.2
-                            color: "#FFD700"
-                            horizontalAlignment: Text.AlignHCenter
-                        }
+                            Item {
+                                id: separator2
+                                width: highScoreRow.width * 0.025
+                            }
 
-                        Item {
-                            id: separator4
-                            width: highScoreRow.width * 0.025
+                            Text {
+                                id: resultDateText
+                                text: Qt.formatDateTime(new Date(modelData.achievedAt), "yyyy-MM-dd" )
+                                width: highScoreRow.width * 0.2
+                                color: "#FFD700"
+                                horizontalAlignment: Text.AlignHCenter
+                            }
+
+                            Item {
+                                id: separator3
+                                width: highScoreRow.width * 0.025
+                            }
+
+                            Text {
+                                id: resultTimeText
+                                text: (modelData.timeSeconds !== undefined ? formatTime(modelData.timeSeconds.toFixed(3) ) : "")
+                                width: highScoreRow.width * 0.2
+                                color: "#FFD700"
+                                horizontalAlignment: Text.AlignHCenter
+                            }
+
+                            Item {
+                                id: separator4
+                                width: highScoreRow.width * 0.025
+                            }
                         }
                     }
                 }
