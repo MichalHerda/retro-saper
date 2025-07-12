@@ -12,10 +12,12 @@ Window {
 
     property bool gameStart: false
     property Item minefieldInstance
+    property Item highScoresPageInstance
 
-    property alias highScoresPage: highScoresPage
+    //property alias highScoresPageComponent: highScoresPageComponent
 
     signal createMinefield()
+    signal createHighScoresPage()
 
     GameSettingsManager {
         id: gameSettingsManager
@@ -45,10 +47,18 @@ Window {
                 }
             }
 
-            HighScoresPage {
-                id: highScoresPage
-                anchors.fill: parent
-                visible: false
+            Component {
+                id: highScoresPageComponent
+
+                HighScoresPage {
+                    id: highScoresPage
+                    anchors.fill: parent
+
+                    Component.onCompleted: {
+                        refreshHighScores()
+                        selectedDifficulty = SaperController.difficultyLevel
+                    }
+                }
             }
         }
 
@@ -67,6 +77,17 @@ Window {
             minefieldInstance.destroy()
         }
         minefieldInstance = minefieldComponent.createObject(titleImageFrame)
+    }
+
+    onCreateHighScoresPage: {
+        console.log("create highScoresPage")
+
+        if (highScoresPageInstance) {
+            console.log("Destroying previous highScoresPage")
+            highScoresPageInstance.destroy()
+        }
+        SaperController.loadHighScoresForDifficulty(SaperController.difficultyLevel)
+        highScoresPageInstance = highScoresPageComponent.createObject(titleImageFrame)
     }
 
     Timer {

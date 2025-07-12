@@ -21,6 +21,12 @@ Rectangle {
         return minStr + ":" + secStr + ":" + msStr;
     }
 
+    function refreshHighScores() {
+        console.log("refresh high scores function")
+        SaperController.loadHighScoresForDifficulty(selectedDifficulty)
+        highScores = SaperController.highScoresForDifficulty(selectedDifficulty)
+    }
+
     Column {
         id: highScoresColumn
         width: highScoresPage.width * 0.95
@@ -62,7 +68,7 @@ Rectangle {
                 console.log("Selected difficulty:", model[currentIndex].text, selectedDifficulty)
                 SaperController.loadHighScoresForDifficulty(selectedDifficulty)
                 var result = SaperController.highScoresForDifficulty(selectedDifficulty)
-                console.log("Fetched high scores:", JSON.stringify(result))
+                //console.log("Fetched high scores:", JSON.stringify(result))
                 highScores = result
             }
 

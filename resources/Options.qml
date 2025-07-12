@@ -132,7 +132,13 @@ Rectangle {
 
             onClicked: {
                 console.log("highScoresButton clicked")
-                highScoresPage.visible = !highScoresPage.visible
+                if (highScoresPageInstance) {
+                    highScoresPageInstance.destroy()
+                    highScoresPageInstance = null
+                }
+                else {
+                    createHighScoresPage()
+                }
             }
         }
     }
