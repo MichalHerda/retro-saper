@@ -9,7 +9,7 @@ Rectangle {
    Image {
       id: backgroundImage
       anchors.fill: parent
-      source: "qrc:/NuclearField.png"
+      source: "qrc:/Images/NuclearField.png"
    }
 
    TableView {

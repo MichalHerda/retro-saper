@@ -34,7 +34,7 @@ Window {
 
             Image {
                 anchors.fill: parent
-                source: "qrc:/SAPER.png"
+                source: "qrc:/Images/SAPER.png"
             }
 
             Component {

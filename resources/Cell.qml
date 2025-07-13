@@ -19,13 +19,11 @@ Item {
         },
         State {
             name: "flagged"
-            //when: cell.isFlagged
             when: model.isFlagged
             PropertyChanges { target: flagImage; visible: true }
         },
         State {
             name: "revealed"
-            //when: cell.isRevealed
             when: model.isRevealed
             PropertyChanges { target: cell;  }
         }
@@ -34,7 +32,7 @@ Item {
     Image {
         id: cellImage
         anchors.fill: cell
-        source: "qrc:/CellImage.png"
+        source: "qrc:/Images/CellImage.png"
     }
 
     Image {
@@ -43,7 +41,7 @@ Item {
         visible: false
         width: cell.width * 0.75
         height: cell.height * 0.75
-        source: "qrc:/RadiationWarning.png"
+        source: "qrc:/Images/RadiationWarning.png"
     }
 
     Image {
@@ -53,7 +51,7 @@ Item {
         width: cell.width * 0.7
         height: cell.height * 0.7
         z: -1
-        source: "qrc:/BombImage.png"
+        source: "qrc:/Images/BombImage.png"
     }
 
     Rectangle {
@@ -93,14 +91,12 @@ Item {
                         console.log("FirstMove! clean neighbors ")
 
                         SaperController.placeBombsRandomly(row, column)
-                        //model.isRevealed = true
                         SaperController.isFirstMove = false
                         SaperController.revealCell(row, column)
                     }
                     else {
                         console.log("clicked at row", row, "column", column, "flagged: ", model.isFlagged)
                         console.log("Left click! Reveal!")
-                        //model.isRevealed = true
                         SaperController.revealCell(row, column)
                     }
                     SaperController.checkForGameOver()

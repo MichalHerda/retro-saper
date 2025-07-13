@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>SAPER.png</file>
         <file>Minefield.qml</file>
         <file>Options.qml</file>
         <file>Cell.qml</file>
-        <file>CellImage.png</file>
-        <file>NuclearField.png</file>
-        <file>RadiationWarning.png</file>
-        <file>BombImage.png</file>
         <file>GameResultDialog.qml</file>
         <file>HighScoresPage.qml</file>
+        <file>Images/BombImage.png</file>
+        <file>Images/CellImage.png</file>
+        <file>Images/NuclearField.png</file>
+        <file>Images/RadiationWarning.png</file>
+        <file>Images/SAPER.png</file>
     </qresource>
 </RCC>
