@@ -7,7 +7,7 @@ Rectangle {
     color: "#1a0f0b"
 
     property int selectedDifficulty: GameSettingsManager.DifficultyLevel.AshenSurvivor
-    property var highScores: []
+    property var highScores: SaperController.highScores
 
     function formatTime(seconds) {
         let mins = Math.floor(seconds / 60);
@@ -73,7 +73,6 @@ Rectangle {
             }
 
             Component.onCompleted: {
-                // Ustaw domyślnie na poziom z property
                 for (var i = 0; i < model.length; i++) {
                     if (model[i].value === selectedDifficulty) {
                         currentIndex = i

@@ -11,6 +11,15 @@ Rectangle {
     property bool askedName: false
     property string playerName: ""
 
+    function submitResult() {
+        if (playerName.length > 0) {
+           SaperController.addHighScore(SaperController.difficultyLevel, playerName, SaperController.lastGameTime)
+           askedName = true;
+           isNewHighScore = false;
+           createHighScoresPage()
+        }
+    }
+
     Component.onCompleted: {
         console.log("gameResultDialog onCompleted")
         if (SaperController.isWin) {
@@ -77,6 +86,10 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             onTextChanged: playerName = text
             font.pointSize: topResultInfoField.height * 0.7
+
+            Keys.onReturnPressed: {
+                submitResult()
+            }
         }
 
         Button {
@@ -87,17 +100,7 @@ Rectangle {
             text: qsTr("Save result and exit")
             font.pointSize: topResultInfoField.height * 0.7
             onClicked: {
-                if (playerName.length > 0) {
-                    gameSettingsManager.addHighScoreInvokable(
-                        SaperController.difficultyLevel,
-                        playerName,
-                        SaperController.lastGameTime
-                    );
-                askedName = true;
-                gameSettingsManager.getHighScores(SaperController.difficultyLevel)
-                createHighScoresPage()
-                isNewHighScore = false;
-                }
+                submitResult()
             }
         }
     }
