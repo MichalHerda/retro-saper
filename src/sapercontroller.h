@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE void resetBoard();
     Q_INVOKABLE bool checkForGameOver();
     Q_INVOKABLE QVariantList highScoresForDifficulty(int difficulty) const;
+    Q_INVOKABLE void addHighScore(int diff, const QString &playerName, double timeSeconds);
 
     GameSettingsManager::DifficultyLevel getDifficultyLevel();
     void setDifficultyLevel(GameSettingsManager::DifficultyLevel difficultyLevel);

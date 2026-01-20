@@ -20,7 +20,7 @@ Item {
         State {
             name: "flagged"
             when: model.isFlagged
-            PropertyChanges { target: flagImage; visible: true }
+            PropertyChanges { target: flagLoader; visible: true }
         },
         State {
             name: "revealed"
