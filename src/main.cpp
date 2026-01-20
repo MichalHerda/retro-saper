@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("MH");
     QCoreApplication::setApplicationName("SAPER");
 
-    SaperController saperController;
+    //SaperController saperController;
 
     QQmlApplicationEngine engine;
     QObject::connect(

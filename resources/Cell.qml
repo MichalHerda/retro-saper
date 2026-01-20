@@ -35,38 +35,42 @@ Item {
         source: "qrc:/Images/CellImage.png"
     }
 
-    Image {
-        id: flagImage
+    Loader {
+        id: flagLoader
         anchors.centerIn: cell
-        visible: false
-        width: cell.width * 0.75
-        height: cell.height * 0.75
-        source: "qrc:/Images/RadiationWarning.png"
+        active: cell.isFlagged
+        sourceComponent: Image {
+            width: cell.width * 0.75
+            height: cell.height * 0.75
+            source: "qrc:/Images/RadiationWarning.png"
+        }
     }
 
-    Image {
-        id: bombImage
+    Loader {
+        id: bombLoader
         anchors.centerIn: cell
-        visible: cell.isMine
-        width: cell.width * 0.7
-        height: cell.height * 0.7
-        z: -1
-        source: "qrc:/Images/BombImage.png"
+        active: cell.isRevealed && cell.isMine
+        sourceComponent: Image {
+            width: cell.width * 0.7
+            height: cell.height * 0.7
+            z: -1
+            source: "qrc:/Images/BombImage.png"
+        }
     }
 
-    Rectangle {
-        id: neighborMinesRec
+    Loader {
+        id: neighborLoader
         anchors.fill: parent
-        color: "transparent"
-        visible: cell.isRevealed && !cell.isMine && cell.neighborMines > 0
-        z: 1
-
-        Text {
-            anchors.centerIn: parent
-            text: cell.neighborMines
-            color: "white"
-            font.pixelSize: parent.width * 0.5
-            font.bold: true
+        active: cell.isRevealed && !cell.isMine && cell.neighborMines > 0
+        sourceComponent: Rectangle {
+            color: "transparent"
+            Text {
+                anchors.centerIn: parent
+                text: cell.neighborMines
+                color: "white"
+                font.pixelSize: parent.width * 0.5
+                font.bold: true
+            }
         }
     }
 
