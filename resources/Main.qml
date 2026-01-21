@@ -4,8 +4,8 @@ import SAPER 1.0
 
 Window {
     id: mainWindow
-    width: 800
-    height: 500
+    width: 1280
+    height: 840
     color: "#1a0f0b"
     visible: true
     title: qsTr("S.A.P.E.R.")
@@ -13,8 +13,6 @@ Window {
     property bool gameStart: false
     property Item minefieldInstance
     property Item highScoresPageInstance
-
-    //property alias highScoresPageComponent: highScoresPageComponent
 
     signal createMinefield()
     signal createHighScoresPage()
@@ -90,14 +88,4 @@ Window {
         highScoresPageInstance = highScoresPageComponent.createObject(titleImageFrame)
     }
 
-    Timer {
-        id: debug
-        interval: 5000
-        running: true
-        repeat: true
-        onTriggered: {
-            //console.log("isFirstMove: ", SaperController.isFirstMove)
-            //console.log("isGameOver: ", SaperController.isGameOver)
-        }
-    }
 }

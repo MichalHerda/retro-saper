@@ -68,7 +68,6 @@ Rectangle {
                 console.log("Selected difficulty:", model[currentIndex].text, selectedDifficulty)
                 SaperController.loadHighScoresForDifficulty(selectedDifficulty)
                 var result = SaperController.highScoresForDifficulty(selectedDifficulty)
-                //console.log("Fetched high scores:", JSON.stringify(result))
                 highScores = result
             }
 
